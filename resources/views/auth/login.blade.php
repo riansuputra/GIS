@@ -58,18 +58,31 @@
                 			<div class="card-body">
                   				<h1>Login</h1>
                   				<p class="text-medium-emphasis">Sign In to your account</p>
-                  					<div class="input-group mb-3"><span class="input-group-text">
+                  					
+									<div class="input-group mb-3"><span class="input-group-text">
                       					<svg class="icon">
                         					<use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
                       					</svg></span>
-                    					<input id="email" name="email" class="form-control" type="email" placeholder="Username">
+                    					<input id="email" name="email" class="form-control" type="email" placeholder="Email">
+										@if ($errors->has('email'))
+											<div class="invalid-feedback">
+												{{ $errors->first('email') }}
+    										</div>
+                                		@endif
                   					</div>
+
 		                  			<div class="input-group mb-4"><span class="input-group-text">
                       					<svg class="icon">
                         					<use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-lock-locked')}}"></use>
                       					</svg></span>
                     					<input id="password" name="password"class="form-control" type="password" placeholder="Password">
+										@if ($errors->has('password'))
+											<div class="invalid-feedback">
+												{{ $errors->first('password') }}
+    										</div>
+                                		@endif
                   					</div>
+
                   					<div class="row">
                     					<div class="col-6">
                       						<button class="btn btn-primary px-4" type="submit">Login</button>
@@ -78,6 +91,7 @@
                       						<button class="btn btn-link px-0" type="button">Forgot password?</button>
                     					</div>
                   					</div>
+
 				                </div>
               				</div>
               				<div class="card col-md-5 text-white bg-primary py-5">

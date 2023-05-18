@@ -4,20 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Pura;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PuraController extends Controller
 {
     function __construct()
     {
         // $this->middleware('admin')->only('index','edit');
-        // $this->middleware('admin')->except('index','edit');
+        // $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('pages.map');
     }
 
     /**

@@ -57,31 +57,43 @@
                         @csrf
                             <h1>Register</h1>
                             <p class="text-medium-emphasis">Create your account</p>
+                            
                             <div class="input-group mb-3"><span class="input-group-text">
                                 <svg class="icon">
                                     <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
-
                                 </svg></span>
                                 <input id="name" name="name" class="form-control" type="text" placeholder="Username">
+                                @if ($errors->has('name'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('name') }}
+                                    </div>
+                                @endif
                             </div>
+
                             <div class="input-group mb-3"><span class="input-group-text">
                                 <svg class="icon">
                                     <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-envelope-open')}}"></use>
                                 </svg></span>
                                 <input id="email" name="email" class="form-control" type="email" placeholder="Email">
+                                @if ($errors->has('email'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('email') }}
+                                    </div>
+                                @endif
                             </div>
+
                             <div class="input-group mb-3"><span class="input-group-text">
                                 <svg class="icon">
                                     <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-lock-locked')}}"></use>
                                 </svg></span>
                                 <input id="password" name="password"class="form-control" type="password" placeholder="Password">
-                            </div>
-                            <div class="input-group mb-4"><span class="input-group-text">
-                                <svg class="icon">
-                                    <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-lock-locked')}}"></use>
-                                </svg></span>
-                                <input id="password-confirm" name="password_confirmation" class="form-control" type="password" placeholder="Repeat password">
-                            </div>
+                                @if ($errors->has('password'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('password') }}
+                                    </div>
+                                @endif
+                            </div>                            
+
                             <button class="btn btn-block btn-success" type="submit">Create Account</button>
                         </div>
                         </form>

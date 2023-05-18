@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\Guest;
+use App\Http\Middleware\User;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PuraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +18,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.register');
-});
-Route::group(['middleware' => ['guest']], function () {
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/register', [AuthController::class, 'register'])->name('register');
-});
+// Route::get('/', function () {
+//     return view('pages.map');
+// });
+Route::get('/', [PuraController::class,'index'])->name('index');
 
-Route::group(['middleware' => ['user']], function () {
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register');
+    Route::get('/login', [LoginController::class, 'loginForm'])->name('loginform');
+    Route::get('/register', [RegisterController::class, 'registerForm'])->name('registerform');
+
+
+
+    Route::get('/signout', [LoginController::class, 'signout'])->name('signout');
     
-});
