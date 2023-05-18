@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $guarded = [
+        'id',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
