@@ -1,0 +1,20 @@
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	
+	}
+
+.leaflet-popup-content {
+    
+    width: 280px;
+    max-width: auto;
+    
+    max-height: auto;
+
+}
+img {
+    height: 20px;
+    width: 20px;
+    display: block;
+    /* Other styles here */
+}
