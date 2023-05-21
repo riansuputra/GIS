@@ -31,17 +31,17 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended(route('index'))
-                             ->withSuccess('Login Success');
+                             ->with('success','Login Success');
         }
 
-        return redirect("login")->withSuccess('Login details are not valid');
+        return redirect('login')->with('error','Incorrect username or password');
     }
 
     public function signout() {
         Session::flush();
         Auth::logout();
 
-        return redirect()->route('index');
+        return redirect()->route('index')->with('success','You have logged out');
     }
 
 }

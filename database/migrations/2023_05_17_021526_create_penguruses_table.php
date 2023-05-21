@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('penguruses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('pura_id')->constrained('puras');
+            $table->string('nama');
+            $table->enum('sebagai',['Pemangku','Ketua','Sekretaris','Bendahara']);
+            $table->string('alamat');
+            $table->string('telepon');
+            $table->year('tahun_mulai');
+            $table->year('tahun_berakhir');
+            $table->enum('status',['Aktif','Tidak Aktif']);
             $table->timestamps();
         });
     }

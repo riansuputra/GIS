@@ -16,7 +16,7 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-    <title>@yield('title') - Leaflet GIS Rian</title>
+    <title>@yield('title') - Pendataan Pura</title>
     <link rel="apple-touch-icon" href="{{url('/template/assets/favicon/pura-icon.png')}}">
     <link rel="icon" type="image/png" href="{{url('/template/assets/favicon/pura-icon.png')}}">
     <link rel="manifest" href="{{url('/template/assets/favicon/manifest.json')}}">
@@ -42,6 +42,11 @@
     <script src="{{url('/js/leaflet.markercluster.js')}}"></script>
     <link rel="stylesheet" href="{{url('/css/MarkerCluster.css')}}" />
     <link rel="stylesheet" href="{{url('/css/MarkerCluster.Default.css')}}" /> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <script>
@@ -71,7 +76,7 @@
         </div>
         <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
             <li class="nav-item">
-                <a class="nav-link" href="{{url('/')}}">
+                <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{url('/')}}">
                     <svg class="nav-icon">
                         <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-map')}}"></use>
                     </svg> Map
@@ -80,7 +85,7 @@
             <li class="nav-title">Data Pura</li>
                 <ul class="nav-group-items">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/template/buttons/button-group.html')}}"> 
+                        <a class="nav-link {{ Request::is('tambahpura*') ? 'active' : '' }}" href="{{ route('tambahpura') }}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-plus')}}"></use>
                             </svg>
@@ -88,7 +93,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/template/buttons/button-group.html')}}"> 
+                        <a class="nav-link {{ Request::is('d*') ? 'active' : '' }}" href="{{url('/template/buttons/button-group.html')}}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-bank')}}"></use>
                             </svg>
@@ -99,7 +104,7 @@
             <li class="nav-title">Data Pelinggih</li>
                 <ul class="nav-group-items">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/template/buttons/button-group.html')}}"> 
+                        <a class="nav-link {{ Request::is('d*') ? 'active' : '' }}" href="{{url('/template/buttons/button-group.html')}}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-plus')}}"></use>
                             </svg>
@@ -107,7 +112,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/template/buttons/button-group.html')}}"> 
+                        <a class="nav-link {{ Request::is('d*') ? 'active' : '' }}" href="{{url('/template/buttons/button-group.html')}}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-bank')}}"></use>
                             </svg>
@@ -118,7 +123,7 @@
             <li class="nav-title">Data Pengurus</li>       
                 <ul class="nav-group-items">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/template/buttons/button-group.html')}}"> 
+                        <a class="nav-link {{ Request::is('d*') ? 'active' : '' }}" href="{{url('/template/buttons/button-group.html')}}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-plus')}}"></use>
                             </svg>
@@ -126,7 +131,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/template/buttons/button-group.html')}}"> 
+                        <a class="nav-link {{ Request::is('d*') ? 'active' : '' }}" href="{{url('/template/buttons/button-group.html')}}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
                             </svg>
@@ -177,8 +182,7 @@
                             {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-end pt-0">
-                            <a class="dropdown-item" href="{{ route('signout') }}"
-                            >
+                            <a class="dropdown-item" href="{{ route('signout') }}">
                                     
                                 <svg class="icon me-2">
                                     <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-account-logout')}}"></use>
@@ -219,8 +223,22 @@
     <!-- CoreUI and necessary plugins-->
     <script src="{{url('/template/vendors/@coreui/coreui/js/coreui.bundle.min.js')}}"></script>
     <script src="{{url('/template/vendors/simplebar/js/simplebar.min.js')}}"></script>
-    <script>
-    </script>
     <script src="{{url('/js/bootstrap.bundle.min.js')}}"></script>
+    <script>
+		@if (Session::has('success'))
+			toastr.options = {
+				"closeButton" : true,
+				"progressBar" : true
+			}
+			toastr.success("{{ Session::get('success') }}");
+		@endif
+		@if (Session::has('error'))
+			toastr.options = {
+				"closeButton" : true,
+				"progressBar" : true
+			}
+			toastr.error("{{ Session::get('error') }}",);
+		@endif
+    </script>
 </body>
 </html>

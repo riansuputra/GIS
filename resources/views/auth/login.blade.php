@@ -32,6 +32,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css">
     <link href="{{url('/template/css/examples.css')}}" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics-->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
     <script>
     	window.dataLayer = window.dataLayer || [];
@@ -63,7 +70,7 @@
                       					<svg class="icon">
                         					<use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
                       					</svg></span>
-                    					<input id="email" name="email" class="form-control" type="email" placeholder="Email">
+                    					<input id="email" name="email" class="form-control @error('email') is-invalid @enderror" type="email" placeholder="Email" value="{{ old('email') }}">
 										@if ($errors->has('email'))
 											<div class="invalid-feedback">
 												{{ $errors->first('email') }}
@@ -75,7 +82,7 @@
                       					<svg class="icon">
                         					<use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-lock-locked')}}"></use>
                       					</svg></span>
-                    					<input id="password" name="password"class="form-control" type="password" placeholder="Password">
+                    					<input id="password" name="password"class="form-control @error('password') is-invalid @enderror" type="password" placeholder="Password">
 										@if ($errors->has('password'))
 											<div class="invalid-feedback">
 												{{ $errors->first('password') }}
@@ -88,7 +95,6 @@
                       						<button class="btn btn-primary px-4" type="submit">Login</button>
                     					</div>
                     					<div class="col-6 text-end">
-                      						<button class="btn btn-link px-0" type="button">Forgot password?</button>
                     					</div>
                   					</div>
 
@@ -98,7 +104,7 @@
                 				<div class="card-body text-center">
                   					<div>
                     					<h2>Sign up</h2>
-                    					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    					<p>&nbsp</p>
                     					<a href="{{ route('register') }}"class="btn btn-lg btn-outline-light mt-3" role="button">Register Now!</a>
                   					</div>
                 				</div>
@@ -112,7 +118,23 @@
     	<!-- CoreUI and necessary plugins-->
     	<script src="{{url('/template/vendors/@coreui/coreui/js/coreui.bundle.min.js')}}"></script>
     	<script src="{{url('/template/vendors/simplebar/js/simplebar.min.js')}}"></script>
-    	<script>
-    	</script>
+		
+		<script>
+		@if (Session::has('success'))
+			toastr.options = {
+				"closeButton" : true,
+				"progressBar" : true
+			}
+			toastr.success("{{ Session::get('success') }}");
+		@endif
+		@if (Session::has('error'))
+			toastr.options = {
+				"closeButton" : true,
+				"progressBar" : true
+			}
+			toastr.error("{{ Session::get('error') }}",);
+		@endif
+		</script>
+
 </body>
 </html>

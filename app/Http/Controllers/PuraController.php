@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Pura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class PuraController extends Controller
 {
     function __construct()
     {
         // $this->middleware('admin')->only('index','edit');
-        // $this->middleware('auth');
+        $this->middleware('auth')->except('index');
     }
     /**
      * Display a listing of the resource.
@@ -26,7 +28,8 @@ class PuraController extends Controller
      */
     public function create()
     {
-        //
+        $puras = DB::table('puras')->get();
+        return view('pages.pura.addPura', compact('puras'));;
     }
 
     /**
@@ -34,7 +37,54 @@ class PuraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validasi = $request->validate([
+            'nama' => 'required|string',
+            'jenis' => 'required',
+            'jenis_piodalan' => 'required',
+            'sapta_wara' => 'nullable',
+            'panca_wara' => 'nullable',
+            'wuku' => 'nullable',
+            'sasih' => 'nullable',
+            'alamat' => 'required|string',
+            'lat' => 'required',
+            'lng' => 'required'
+        ]);
+
+        // dd($request);
+
+        
+        DB::table('puras')->insert($validasi);
+        // dd($request);
+        $this->validate($request, [
+            'fotos.*' => 'required',
+        ]);
+
+        $id = Pura::orderBy('id', 'DESC')->first()->id;
+        if ($id) {
+            $fotos = [];
+            if(!empty($request->file('fotos'))) {
+                foreach($request->file('fotos') as $foto){
+                    if($foto->isValid()){
+                        $nama_image = time()."_".$foto->getClientOriginalName();
+                        // Storage::putFileAs('public', $file, $nama_image);
+                        $path = public_path('/foto/pura');
+                        $foto->move($path, $nama_image);
+                        $fotos[] = [
+                            'pura_id' => $id,
+                            'is_thumbnail' => 1,
+                            'foto' => $nama_image,
+                            'type' => 'Pura',
+                        ];
+                    }
+                }
+            }
+            Foto::insert($fotos);
+        }
+
+
+
+
+        return redirect()->route('index')->with('success','Berhasil menambah pura');
     }
 
     /**

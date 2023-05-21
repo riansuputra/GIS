@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pendataan Pura')
+@section('title', 'Map')
 
 @section('breadcrumb')
 <li class="breadcrumb-item active"><span>Map</span></li>

@@ -22,9 +22,9 @@ class RegisterController extends Controller
 
     public function register(Request $request) {
         $request->validate([
-            'name' =>'required',
+            'name' =>'required|string|max:20',
             'email' =>'required|email|unique:users',
-            'password' =>'required|min:6'
+            'password' =>'required|string|min:6|max:20'
         ]);
 
         $data = $request->all();
@@ -35,6 +35,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password'])
         ]);
 
-        return redirect()->route('index');
+        return redirect()->route('login')->with('success','Registration successfull!');;
     }
 }

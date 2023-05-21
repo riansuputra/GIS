@@ -62,7 +62,7 @@
                                 <svg class="icon">
                                     <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
                                 </svg></span>
-                                <input id="name" name="name" class="form-control" type="text" placeholder="Username">
+                                <input id="name" name="name" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Username" value="{{ old('name') }}">
                                 @if ($errors->has('name'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('name') }}
@@ -74,7 +74,7 @@
                                 <svg class="icon">
                                     <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-envelope-open')}}"></use>
                                 </svg></span>
-                                <input id="email" name="email" class="form-control" type="email" placeholder="Email">
+                                <input id="email" name="email" class="form-control @error('email') is-invalid @enderror" type="email" placeholder="Email" value="{{ old('email') }}">
                                 @if ($errors->has('email'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('email') }}
@@ -86,14 +86,13 @@
                                 <svg class="icon">
                                     <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-lock-locked')}}"></use>
                                 </svg></span>
-                                <input id="password" name="password"class="form-control" type="password" placeholder="Password">
+                                <input id="password" name="password"class="form-control @error('password') is-invalid @enderror" type="password" placeholder="Password" value="{{ old('password') }}">
                                 @if ($errors->has('password'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('password') }}
                                     </div>
                                 @endif
                             </div>                            
-
                             <button class="btn btn-block btn-success" type="submit">Create Account</button>
                         </div>
                         </form>

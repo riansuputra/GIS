@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('pelinggihs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('pura_id')->constrained('puras');
+            $table->string('nama');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }
