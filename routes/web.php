@@ -6,6 +6,8 @@ use App\Http\Middleware\User;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PuraController;
+use App\Http\Controllers\PelinggihController;
+use App\Http\Controllers\PengurusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +29,16 @@ Route::get('/register', [RegisterController::class, 'registerForm'])->name('regi
 Route::get('/signout', [LoginController::class, 'signout'])->name('signout');
 
 Route::get('/tambahpura', [PuraController::class, 'create'])->name('tambahpura');
-Route::post('create', [PuraController::class, 'store'])->name('create');
-Route::post('/{id}/edit', [PuraController::class, 'update'])->name('update'); 
-Route::get('/{id}/delete', [PuraController::class, 'destroy'])->name('delete'); 
+Route::post('create', [PuraController::class, 'store'])->name('createpura');
+Route::post('/{id}/editpura', [PuraController::class, 'update'])->name('updatepura'); 
+Route::get('/{id}/deletepura', [PuraController::class, 'destroy'])->name('deletepura'); 
     
+Route::get('/tambahpelinggih', [PelinggihController::class, 'create'])->name('tambahpelinggih');
+Route::post('/{id}/createpelinggih', [PelinggihController::class, 'store'])->name('createpelinggih');
+Route::post('/{id}/editpelinggih', [PelinggihController::class, 'update'])->name('updatepelinggih'); 
+Route::get('/{id}/deletepelinggih', [PelinggihController::class, 'destroy'])->name('deletepelinggih'); 
+
+Route::get('/tambahpengurus', [PengurusController::class, 'create'])->name('tambahpengurus');
+Route::post('/{id}/createpengurus', [PengurusController::class, 'store'])->name('createpengurus');
+Route::post('/{id}/editpengurus', [PengurusController::class, 'update'])->name('updatepengurus'); 
+Route::get('/{id}/deletepengurus', [PengurusController::class, 'destroy'])->name('deletepengurus'); 

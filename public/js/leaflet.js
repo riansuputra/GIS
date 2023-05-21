@@ -12,7 +12,7 @@ var markerClusters = L.markerClusterGroup().addTo(map);
 var isOnDrag = false;
 
 var myIcon = L.icon({
-    iconUrl: 'icon-temple.png',
+    iconUrl: '/foto/icon-temple.png',
     iconSize: [50, 40],
     iconAnchor: [20, 40],
 });
@@ -31,9 +31,10 @@ puras.forEach(function (pura, index) {
 
 map.on('click', function(e) {
     
-    document.getElementById("buttonAddModal").click();
+    // document.getElementById("buttonAddModal").click();
     document.getElementById("lat").value = e.latlng.lat;
     document.getElementById("lng").value = e.latlng.lng;
+    markers = new L.Marker(e.latlng, { icon: myIcon }).addTo(map);
         // Buat marker baru
         // var newMarker = addMarker(e.latlng,markers.length);
         // console.log(document.getElementById('email').value);

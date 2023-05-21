@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Pelinggih;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Foto;
+use App\Models\Pura;
+use App\Models\Pengurus;
 
 class PelinggihController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -20,15 +29,54 @@ class PelinggihController extends Controller
      */
     public function create()
     {
-        //
+        $puras = DB::table('puras')->get();
+        return view('pages.pelinggih.addPelinggih', compact('puras'));;
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nama' => 'required|string',
+            'keterangan' => 'required',
+        ]);
+
+        $pelinggih = new Pelinggih;
+        $pelinggih->pura_id = $request->pura_id;
+        $pelinggih->nama = $request->nama;
+        $pelinggih->keterangan = $request->keterangan;
+        $pelinggih->save();
+
+        $this->validate($request, [
+            'fotos.*' => 'required',
+        ]);
+
+        $id_pel = Pelinggih::orderBy('id', 'DESC')->first()->id;
+        if ($id_pel) {
+            $fotos = [];
+            if(!empty($request->file('fotos'))) {
+                foreach($request->file('fotos') as $foto){
+                    if($foto->isValid()){
+                        $nama_image = time()."_".$foto->getClientOriginalName();
+                        // Storage::putFileAs('public', $file, $nama_image);
+                        $path = public_path('/foto/pelinggih');
+                        $foto->move($path, $nama_image);
+                        $fotos[] = [
+                            'pura_id' => $request->pura_id,
+                            'pelinggih_id' => $id_pel,
+                            'is_thumbnail' => 1,
+                            'foto' => $nama_image,
+                            'type' => 'Pelinggih',
+                        ];
+                    }
+                }
+            }
+            Foto::insert($fotos);
+        }
+
+        return redirect()->route('index')->with('success','Berhasil menambah pelinggih');;
     }
 
     /**

@@ -8,11 +8,12 @@
 
 @section('content')
 
-
 <div class="card">
     <div class="card-body">
-        <div id="map" style="height: 680px"> 
-            
+        <div id="map" style="height: 680px">               
+            <script type="text/javascript">
+                let puras = <?php echo json_encode($puras); ?>;
+            </script>
             <script type="text/javascript" src="{{url('js/leaflet.js')}}"></script>         
         </div>
     </div>

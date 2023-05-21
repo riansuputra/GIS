@@ -20,34 +20,49 @@
                         @csrf
                     <div class="mb-3">
                         <label class="form-label" for="nama">Nama Pura :</label>
-                        <input class="form-control" id="nama" name="nama" type="text" placeholder="Nama Pura">
+                        <input class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" type="text" placeholder="Nama Pura" value="{{ old('nama') }}">
+                        @if ($errors->has('nama'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('nama') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="jenis">Jenis Pura :</label>
-                        <select class="form-select" id="jenis" name="jenis" aria-label="Default select example">
-                            <option selected>Pilih Jenis Pura</option>
+                        <select class="form-select @error('jenis') is-invalid @enderror" id="jenis" name="jenis" aria-label="Default select example" value="{{ old('jenis') }}">
+                            <option value="">Pilih Jenis Pura</option>
                             <option value="Swagina">Swagina</option>
                             <option value="Kawitan">Kawitan</option>
                             <option value="Kahyangan Tiga">Kahyangan Tiga</option>
                             <option value="Kahyangan Jagat">Kahyangan Jagat</option>
                         </select>
+                        @if ($errors->has('jenis'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('jenis') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="mb-2 mt-4">
                         <label class="form-label" for="jenis_piodalan">Piilh Jenis Piodalan :&nbsp&nbsp&nbsp&nbsp&nbsp</label>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="jenis_piodalan" id="inlineRadio1" value="wuku">
+                            <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio1" value="wuku">
                             <label class="form-check-label" for="inlineRadio1">Wuku</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="jenis_piodalan" id="inlineRadio2" value="sasih">
+                            <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio2" value="sasih">
                             <label class="form-check-label" for="inlineRadio2">Sasih</label>
                         </div>
+                        @if ($errors->has('jenis_piodalan'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('jenis_piodalan') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="row mb-3">
                         <label class="form-label" for="wuku">Berdasarkan Wuku :</label>
                         <div class="col">
-                            <select class="form-select" id="sapta_wara" name="sapta_wara" aria-label="Default select example">
-                                <option selected>Pilih Sapta Wara</option>
+                            <select class="form-select @error('sapta_wara') is-invalid @enderror" id="sapta_wara" name="sapta_wara" aria-label="Default select example" value="{{ old('sapta_wara') }}">
+                                <option value="">Pilih Sapta Wara</option>
                                 <option value="Redite">Redite</option>
                                 <option value="Soma">Soma</option>
                                 <option value="Anggara">Anggara</option>
@@ -56,21 +71,30 @@
                                 <option value="Sukra">Sukra</option>
                                 <option value="Saniscara">Saniscara</option>
                             </select>
-
+                            @if ($errors->has('sapta_wara'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('sapta_wara') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="col">
-                            <select class="form-select" id="panca_wara" name="panca_wara" aria-label="Default select example">
-                                <option selected>Pilih Panca Wara</option>
+                            <select class="form-select @error('panca_wara') is-invalid @enderror" id="panca_wara" name="panca_wara" aria-label="Default select example" value="{{ old('panca_wara') }}">
+                                <option value="">Pilih Panca Wara</option>
                                 <option value="Umanis">Umanis</option>
                                 <option value="Paing">Paing</option>
                                 <option value="Pon">Pon</option>
                                 <option value="Wage">Wage</option>
                                 <option value="Kliwon">Kliwon</option>
                             </select>
+                            @if ($errors->has('panca_wara'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('panca_wara') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="col">
-                            <select class="form-select" id="wuku" name="wuku" aria-label="Default select example">
-                                <option selected>Pilih Wuku</option>
+                            <select class="form-select @error('wuku') is-invalid @enderror" id="wuku" name="wuku" aria-label="Default select example" value="{{ old('wuku') }}">
+                                <option value="">Pilih Wuku</option>
                                 <option value="Sinta">Sinta</option>
                                 <option value="Landep">Landep</option>
                                 <option value="Ukir">Ukir</option>
@@ -102,13 +126,17 @@
                                 <option value="Dukut">Dukut</option>
                                 <option value="Watugunung">Watugunung</option>
                             </select>
+                            @if ($errors->has('wuku'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('wuku') }}
+                                </div>
+                            @endif
                         </div>
                     </div>
-                    
                     <div class="mb-3">
                         <label class="form-label" for="sasih">Berdasarkan Sasih :</label>
-                        <select class="form-select" id="sasih" name="sasih" aria-label="Default select example">
-                            <option selected>Pilih Sasih</option>
+                        <select class="form-select @error('sasih') is-invalid @enderror" id="sasih" name="sasih" aria-label="Default select example" value="{{ old('sasih') }}">
+                            <option value="">Pilih Sasih</option>
                             <option value="Kasa">Kasa</option>
                             <option value="Karo">Karo</option>
                             <option value="Katiga">Katiga</option>
@@ -122,40 +150,37 @@
                             <option value="Jiyestha">Jiyestha</option>
                             <option value="Sadha">Sadha</option>
                         </select>
+                        @if ($errors->has('sasih'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('sasih') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="alamat">Alamat Pura :</label>
-                        <input class="form-control" id="alamat" name="alamat" type="text" placeholder="Alamat Pura">
+                        <input class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" type="text" placeholder="Alamat Pura" value="{{ old('alamat') }}">
+                        @if ($errors->has('alamat'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('alamat') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="mb-4">
                         <label for="formFile" class="form-label">Tambah Foto :</label>
-                        <input class="form-control" name="fotos[]" type="file" id="fotos" multiple>
+                        <input class="form-control @error('fotos') is-invalid @enderror" name="fotos[]" type="file" id="fotos" multiple>
+                        @if ($errors->has('fotos'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('fotos') }}
+                            </div>
+                        @endif
                     </div>
-                    <input type="text" id="lat" name="lat" class="form-control" hidden />
-                    <input type="text" id="lng" name="lng" class="form-control" hidden />
+                    <input type="text" id="lat" name="lat" class="form-control" hidden value="{{ old('lat') }}"/>
+                    <input type="text" id="lng" name="lng" class="form-control" hidden value="{{ old('lng') }}"/>
                     <button data-mdb-ripple-duration=0 class="btn btn-success" type="submit">Tambah</button>
                     </form>
                 </div>
             </div>
             <div class="vr"></div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Tambah Pura ?</h5>
-                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-footer justify-content-between">
-                @guest
-                    <a role="button" data-mdb-ripple-duration="0" href="{{route('login')}}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspYa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                @else
-                    <a role="button" data-mdb-ripple-duration="0" href="{{route('tambahpura')}}" class="btn btn-primary">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspYa&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                @endguest
-                <button type="button" data-mdb-ripple-duration="0" class="btn btn-secondary" data-coreui-dismiss="modal">&nbsp&nbsp&nbsp&nbspTidak&nbsp&nbsp&nbsp&nbsp</button>
-            </div>
-        </div>
-    </div>
-</div>
             <div class="col">
                 <div id="map" style="height: 640px">               
                 <script type="text/javascript">

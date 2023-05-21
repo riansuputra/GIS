@@ -6,6 +6,9 @@ use App\Models\Pura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Foto;
+use App\Models\Pelinggih;
+use App\Models\Pengurus;
 
 
 class PuraController extends Controller
@@ -20,7 +23,12 @@ class PuraController extends Controller
      */
     public function index()
     {
-        return view('pages.map');
+        $puras = Pura::all();
+        $fotos = Foto::all();
+        // dd($fotos);
+        $penguruses = Pengurus::all();
+        $pelinggihs = Pelinggih::all();
+        return view('pages.map', compact('puras','fotos','pelinggihs','penguruses'));;
     }
 
     /**
@@ -51,12 +59,11 @@ class PuraController extends Controller
         ]);
 
         // dd($request);
-
         
         DB::table('puras')->insert($validasi);
         // dd($request);
         $this->validate($request, [
-            'fotos.*' => 'required',
+            'fotos.*' => 'required|file|image',
         ]);
 
         $id = Pura::orderBy('id', 'DESC')->first()->id;
@@ -80,9 +87,6 @@ class PuraController extends Controller
             }
             Foto::insert($fotos);
         }
-
-
-
 
         return redirect()->route('index')->with('success','Berhasil menambah pura');
     }

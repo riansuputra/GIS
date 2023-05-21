@@ -93,7 +93,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('d*') ? 'active' : '' }}" href="{{url('/template/buttons/button-group.html')}}"> 
+                        <a class="nav-link {{ Request::is('daftarpura*') ? 'active' : '' }}" href="{{ route('tambahpura') }}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-bank')}}"></use>
                             </svg>
@@ -104,7 +104,7 @@
             <li class="nav-title">Data Pelinggih</li>
                 <ul class="nav-group-items">
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('d*') ? 'active' : '' }}" href="{{url('/template/buttons/button-group.html')}}"> 
+                        <a class="nav-link {{ Request::is('tambahpelinggih*') ? 'active' : '' }}" href="{{ route('tambahpelinggih') }}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-plus')}}"></use>
                             </svg>
@@ -112,7 +112,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('d*') ? 'active' : '' }}" href="{{url('/template/buttons/button-group.html')}}"> 
+                        <a class="nav-link {{ Request::is('daftarpelinggih*') ? 'active' : '' }}" href="{{ route('tambahpura') }}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-bank')}}"></use>
                             </svg>
@@ -123,7 +123,7 @@
             <li class="nav-title">Data Pengurus</li>       
                 <ul class="nav-group-items">
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('d*') ? 'active' : '' }}" href="{{url('/template/buttons/button-group.html')}}"> 
+                        <a class="nav-link {{ Request::is('tambahpengurus*') ? 'active' : '' }}" href="{{ route('tambahpengurus') }}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-plus')}}"></use>
                             </svg>
@@ -131,7 +131,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('d*') ? 'active' : '' }}" href="{{url('/template/buttons/button-group.html')}}"> 
+                        <a class="nav-link {{ Request::is('daftarpengurus*') ? 'active' : '' }}" href="{{ route('tambahpura') }}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
                             </svg>
