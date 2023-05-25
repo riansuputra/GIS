@@ -63,7 +63,9 @@ class PengurusController extends Controller
      */
     public function show(Pengurus $pengurus)
     {
-        
+        $puras = Pura::all();
+        $penguruses = Pengurus::all();
+        return view('pages.pengurus.listPengurus', compact('puras', 'penguruses'));
     }
 
     /**

@@ -94,9 +94,22 @@ class PuraController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pura $pura)
+    public function show()
     {
-        //
+        $puras = Pura::all();
+        return view('pages.pura.listPura', compact('puras'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function detail($id)
+    {
+        $puras = Pura::find($id);
+        $fotos = Foto::all();
+        $penguruses = Pengurus::all();
+        $pelinggihs = Pelinggih::all();
+        return view('pages.pura.detailPura', compact('puras','fotos','penguruses','pelinggihs'));
     }
 
     /**

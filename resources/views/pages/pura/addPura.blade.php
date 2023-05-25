@@ -182,7 +182,7 @@
             </div>
             <div class="vr"></div>
             <div class="col">
-                <div id="map" style="height: 640px">               
+                <div id="map" style="height: 610px">               
                 <script type="text/javascript">
                 let puras = <?php echo json_encode($puras); ?>;
             </script>

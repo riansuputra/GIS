@@ -66,7 +66,10 @@ map.on('click', function(e) {
 // markers.forEach(function (marker, index){
     markers.forEach(function (marker, index) {
         marker.on('click', function(e) {
-            document.getElementById(`buttonPura_${puras[index].id}`).click();
+            // document.getElementById(`buttonPura_${puras[index].id}`).click();
+            // document.getElementById(`buttonPura_${puras[index].id}`).action = `https://localhost:8000/${puras[index].id}/detailpura`;;
+            // console.log(`${puras[index].id}`);
+            window.open(`http://localhost:8000/${puras[index].id}/detailpura`,'_self');
             // var popup = L.popup(e.latlng, {
             //     content: `
             //     <h5>${puras[index].nama}</h5>

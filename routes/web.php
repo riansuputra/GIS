@@ -29,16 +29,22 @@ Route::get('/register', [RegisterController::class, 'registerForm'])->name('regi
 Route::get('/signout', [LoginController::class, 'signout'])->name('signout');
 
 Route::get('/tambahpura', [PuraController::class, 'create'])->name('tambahpura');
+Route::get('/daftarpura', [PuraController::class, 'show'])->name('daftarpura');
+Route::get('/{id}/detailpura', [PuraController::class, 'detail'])->name('detailpura');
 Route::post('create', [PuraController::class, 'store'])->name('createpura');
 Route::post('/{id}/editpura', [PuraController::class, 'update'])->name('updatepura'); 
 Route::get('/{id}/deletepura', [PuraController::class, 'destroy'])->name('deletepura'); 
     
 Route::get('/tambahpelinggih', [PelinggihController::class, 'create'])->name('tambahpelinggih');
+Route::get('/daftarpelinggih', [PelinggihController::class, 'show'])->name('daftarpelinggih');
+Route::get('/{id}/detailpelinggih', [PelinggihController::class, 'detail'])->name('detailpelinggih');
 Route::post('/{id}/createpelinggih', [PelinggihController::class, 'store'])->name('createpelinggih');
 Route::post('/{id}/editpelinggih', [PelinggihController::class, 'update'])->name('updatepelinggih'); 
 Route::get('/{id}/deletepelinggih', [PelinggihController::class, 'destroy'])->name('deletepelinggih'); 
 
 Route::get('/tambahpengurus', [PengurusController::class, 'create'])->name('tambahpengurus');
+Route::get('/daftarpengurus', [PengurusController::class, 'show'])->name('daftarpengurus');
+Route::get('/{id}/detailpengurus', [PengurusController::class, 'detail'])->name('detailpengurus');
 Route::post('/{id}/createpengurus', [PengurusController::class, 'store'])->name('createpengurus');
 Route::post('/{id}/editpengurus', [PengurusController::class, 'update'])->name('updatepengurus'); 
 Route::get('/{id}/deletepengurus', [PengurusController::class, 'destroy'])->name('deletepengurus'); 

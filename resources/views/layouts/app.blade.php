@@ -33,7 +33,12 @@
     <link href="{{url('/template/css/examples.css')}}" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics-->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
-
+    <!-- <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    /> -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/template/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.3/template/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <link rel="stylesheet" href="{{url('/css/leaflet.css')}}" />
@@ -43,6 +48,18 @@
     <link rel="stylesheet" href="{{url('/css/MarkerCluster.css')}}" />
     <link rel="stylesheet" href="{{url('/css/MarkerCluster.Default.css')}}" /> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css"
+    />
 
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
@@ -93,7 +110,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('daftarpura*') ? 'active' : '' }}" href="{{ route('tambahpura') }}"> 
+                        <a class="nav-link {{ Request::is('daftarpura*') ? 'active' : '' }}" href="{{ route('daftarpura') }}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-bank')}}"></use>
                             </svg>
@@ -112,7 +129,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('daftarpelinggih*') ? 'active' : '' }}" href="{{ route('tambahpura') }}"> 
+                        <a class="nav-link {{ Request::is('daftarpelinggih*') ? 'active' : '' }}" href="{{ route('daftarpelinggih') }}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-bank')}}"></use>
                             </svg>
@@ -131,7 +148,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('daftarpengurus*') ? 'active' : '' }}" href="{{ route('tambahpura') }}"> 
+                        <a class="nav-link {{ Request::is('daftarpengurus*') ? 'active' : '' }}" href="{{ route('daftarpengurus') }}"> 
                             <svg class="nav-icon">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
                             </svg>
@@ -199,9 +216,8 @@
             </div>
             <div class="header-divider"></div>
             <div class="container-fluid">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb my-0 ms-2">
-                        <li class="breadcrumb-item"><span>Home</span></li>
+                <nav aria-label="breadcrumb" >
+                    <ol class="breadcrumb my-0 ms-2" style="background-color: transparent;">
                         @yield('breadcrumb')
                     </ol>
                 </nav>

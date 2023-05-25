@@ -82,9 +82,11 @@ class PelinggihController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pelinggih $pelinggih)
+    public function show()
     {
-        //
+        $puras = Pura::all();
+        $pelinggihs = Pelinggih::all();
+        return view('pages.pelinggih.listPelinggih', compact('puras','pelinggihs'));
     }
 
     /**
