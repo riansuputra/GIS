@@ -16,7 +16,7 @@ class PuraController extends Controller
     function __construct()
     {
         // $this->middleware('admin')->only('index','edit');
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index','detail');
     }
     /**
      * Display a listing of the resource.
@@ -109,6 +109,11 @@ class PuraController extends Controller
         $fotos = Foto::all();
         $penguruses = Pengurus::all();
         $pelinggihs = Pelinggih::all();
+
+        // $pemangku = DB::table('penguruses')
+        //     ->select('id')
+        //     ->where('pura_id', '=', $id)->get();
+
         return view('pages.pura.detailPura', compact('puras','fotos','penguruses','pelinggihs'));
     }
 

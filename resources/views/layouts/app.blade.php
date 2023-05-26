@@ -168,14 +168,14 @@
                         <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-menu')}}"></use>
                     </svg>
                 </button>
-                <a class="header-brand d-md-none" href="#">
+                <a class="header-brand d-md-none" href="{{url('/')}}">
                     <svg width="118" height="46" alt="CoreUI Logo">
                         <use xlink:href="{{url('/template/assets/brand/coreui.svg#full')}}"></use>
                     </svg>
                 </a>
                 <ul class="header-nav d-none d-md-flex">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pendataan Pura</a>
+                        <a class="nav-link" href="{{url('/')}}">Pendataan Pura</a>
                     </li>
                 </ul>
                 <ul class="header-nav ms-auto">
