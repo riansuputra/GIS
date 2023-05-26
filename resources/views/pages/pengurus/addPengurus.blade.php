@@ -72,7 +72,7 @@
                     <div class="row mb-2">
                         <div class="col-6">
                             <label class="form-label" for="tahun_mulai">Tahun Mulai :</label>
-                            <input class="form-control @error('tahun_mulai') is-invalid @enderror" id="tahun_mulai" name="tahun_mulai" type="text" placeholder="Telepon">
+                            <input class="form-control @error('tahun_mulai') is-invalid @enderror" id="tahun_mulai" name="tahun_mulai" type="text" placeholder="Tahun Mulai">
                             @if ($errors->has('tahun_mulai'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('tahun_mulai') }}
@@ -81,7 +81,7 @@
                         </div>
                         <div class="col-6">
                             <label class="form-label" for="tahun_berakhir">Tahun Berakhir :</label>
-                            <input class="form-control @error('tahun_berakhir') is-invalid @enderror" id="tahun_berakhir" name="tahun_berakhir" type="text" placeholder="Telepon">
+                            <input class="form-control @error('tahun_berakhir') is-invalid @enderror" id="tahun_berakhir" name="tahun_berakhir" type="text" placeholder="Tahun Berakhir">
                             @if ($errors->has('tahun_berakhir'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('tahun_berakhir') }}

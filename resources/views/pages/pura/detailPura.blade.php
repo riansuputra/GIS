@@ -70,7 +70,7 @@
                                     <label class="form-label" for="alamat">Alamat Pura :</label>
                                     <input class="form-control" id="alamat" name="alamat" type="text" value="{{ $puras->alamat }}" disabled readonly>
                                 </div>
-                                @if(empty($penguruses->id))
+                                @if(!empty($penguruses->id))
                                 <div class="row">
                                     
                                     <div class="col">
@@ -104,7 +104,7 @@
                                             <label class="form-label" for="notelp">No. Telp. Pemangku :</label>
                                             <input class="form-control" id="notelp" name="notelp" type="text" value="{{ $pengurus->telepon }}" disabled readonly>
                                         </div>
-                                        @break
+                                        
                                         @endif
                                     @endforeach
                                     </div>
@@ -154,20 +154,18 @@
                         <tbody>
                             @foreach($pelinggihs as $pelinggih)
                             <tr>
+                                @if($pelinggih->pura_id == $puras->id)
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{$pelinggih->nama}}</td>
                                 @foreach($fotos as $foto)
                                     @if($foto->type == "Pelinggih" && $foto->pura_id == $puras->id)
-                                        <td><img src="{{url('foto/pelinggih/'.$foto->foto)}}" class="d-block w-80" alt="..."></td>
-                                        @else
-                                        <td>-</td>
-                                        @break
+                                        <td align="center"><img src="{{url('foto/pelinggih/'.$foto->foto)}}" class="d-block w-80" alt="..." style="width:50%;height:80px"></td>
                                     @endif
                                 @endforeach
                                 <td>{{$pelinggih->keterangan}}</td>
                                 <td>test</td>
-                                
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -200,7 +198,7 @@
                                 <td>{{$pengurus->tahun_mulai}}</td>
                                 <td>{{$pengurus->tahun_berakhir}}</td>
                                 <td>{{$pengurus->status}}</td>
-                                <td>test</td>
+                                <td><button type="button" class="btn btn-primary"><span class="cil-contrast btn-icon mr-2"></span> Details</button></td>
                             </tr>
                             @endif
                             @endforeach
