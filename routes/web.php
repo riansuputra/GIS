@@ -37,6 +37,7 @@ Route::get('/{id}/deletepura', [PuraController::class, 'destroy'])->name('delete
     
 Route::get('/tambahpelinggih', [PelinggihController::class, 'create'])->name('tambahpelinggih');
 Route::get('/daftarpelinggih', [PelinggihController::class, 'show'])->name('daftarpelinggih');
+Route::get('/{id}/daftarpelinggih', [PelinggihController::class, 'showlist'])->name('daftarlistpelinggih');
 Route::get('/{id}/detailpelinggih', [PelinggihController::class, 'detail'])->name('detailpelinggih');
 Route::post('/{id}/createpelinggih', [PelinggihController::class, 'store'])->name('createpelinggih');
 Route::post('/{id}/editpelinggih', [PelinggihController::class, 'update'])->name('updatepelinggih'); 
@@ -44,6 +45,7 @@ Route::get('/{id}/deletepelinggih', [PelinggihController::class, 'destroy'])->na
 
 Route::get('/tambahpengurus', [PengurusController::class, 'create'])->name('tambahpengurus');
 Route::get('/daftarpengurus', [PengurusController::class, 'show'])->name('daftarpengurus');
+Route::get('/{id}/daftarpengurus', [PengurusController::class, 'showlist'])->name('daftarlistpengurus');
 Route::get('/{id}/detailpengurus', [PengurusController::class, 'detail'])->name('detailpengurus');
 Route::post('/{id}/createpengurus', [PengurusController::class, 'store'])->name('createpengurus');
 Route::post('/{id}/editpengurus', [PengurusController::class, 'update'])->name('updatepengurus'); 

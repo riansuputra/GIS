@@ -86,7 +86,21 @@ class PelinggihController extends Controller
     {
         $puras = Pura::all();
         $pelinggihs = Pelinggih::all();
-        return view('pages.pelinggih.listPelinggih', compact('puras','pelinggihs'));
+        return view('pages.pelinggih.daftarPelinggih', compact('puras','pelinggihs'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function showlist($id)
+    {
+        $puras = Pura::all();
+        $puraid = DB::table('puras')
+            ->where('id', '=', $id)->get();
+        // $pelinggihs = Pelinggih::all();
+        $pelinggihs = DB::table('pelinggihs')
+            ->where('pura_id', '=', $id)->get();
+        return view('pages.pelinggih.listPelinggih', compact('puras','pelinggihs','puraid'));
     }
 
     /**
