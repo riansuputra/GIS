@@ -40,8 +40,9 @@ Route::get('/daftarpelinggih', [PelinggihController::class, 'show'])->name('daft
 Route::get('/{id}/daftarpelinggih', [PelinggihController::class, 'showlist'])->name('daftarlistpelinggih');
 Route::get('/{id}/detailpelinggih', [PelinggihController::class, 'detail'])->name('detailpelinggih');
 Route::post('/{id}/createpelinggih', [PelinggihController::class, 'store'])->name('createpelinggih');
-Route::post('/{id}/editpelinggih', [PelinggihController::class, 'update'])->name('updatepelinggih'); 
-Route::get('/{id}/deletepelinggih', [PelinggihController::class, 'destroy'])->name('deletepelinggih'); 
+Route::get('/{puraid}/{id}/editpelinggih', [PelinggihController::class, 'edit'])->name('editpelinggih');
+Route::post('/{puraid}/{id}/updatepelinggih', [PelinggihController::class, 'update'])->name('updatepelinggih'); 
+Route::get('/{puraid}/{id}/deletepelinggih', [PelinggihController::class, 'destroy'])->name('deletepelinggih'); 
 
 Route::get('/tambahpengurus', [PengurusController::class, 'create'])->name('tambahpengurus');
 Route::get('/daftarpengurus', [PengurusController::class, 'show'])->name('daftarpengurus');

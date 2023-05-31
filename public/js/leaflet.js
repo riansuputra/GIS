@@ -17,7 +17,6 @@ var myIcon = L.icon({
     iconAnchor: [20, 40],
 });
 
-
 puras.forEach(function (pura, index) {
     markers.push(
         new L.Marker([pura.lat, pura.lng], {

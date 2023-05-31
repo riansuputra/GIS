@@ -14,41 +14,34 @@
         </div>
         <div class="card-body row">
             <div class="tab-content rounded-bottom">
-                
-                
-            <label class="form-label" for="pura_id">Pilih Pura :</label>
-                        
-                        
-                        <select class="form-select @error('pura_id') is-invalid @enderror" id="pura_id" name="pura_id" aria-label="Default select example">
-                                <option>Pilih Pura</option>
-                            
+                <label class="form-label" for="pura_id">Pilih Pura :</label>
+                    <select class="form-select @error('pura_id') is-invalid @enderror" id="pura_id" name="pura_id" aria-label="Default select example" >
+                        <option>Pilih Pura</option>
                         @foreach($puras as $pura)
-                                <option value="{{$pura->id}}">{{$pura->nama}}</option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('pura_id'))
+                            <option value="{{$pura->id}}">{{$pura->nama}}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('pura_id'))
                         <div class="invalid-feedback">
                             {{ $errors->first('pura_id') }}
                         </div>
-                        @endif
+                    @endif
                 <br>
-                <table id="datatable" class="table table-bordered">
+                <table id="datatable" class="table table-bordered border datatable">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th style="text-align: center">No</th>
                             <th>Nama Pelinggih</th>
                             <th>Keterangan</th>
-                            <th>Foto</th>
-                            <th>Action</th>
+                            <th style="text-align: center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td style="width:5%; text-align: center"></td>
+                            <td style="width:30%;"></td>
+                            <td style="width:30%;"></td>
+                            <td style="width:10%; text-align: center"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -66,28 +59,12 @@
         var id = this.value;
         window.location.href = "http://localhost:8000/" + id + "/daftarpelinggih"
     });
-    // $('#btn').on('click', function() {
-    //     var select_value = $('#instructorSelector').val();
-
-    //     // use the value here
-    // });
-
-    // $(function(){
-    // // bind change event to select
-    //     $('#submit').on('click', function () {
-    //         var url = $('#pura_id').val(); // get selected value
-    //         if (url!="") { // require a URL
-    //             window.location.href = url; // redirect
-    //         }
-    //         else
-    //             alert('Please select a Website!');
-    //         return false;
-    //     });
-    // });
 </script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+<script src="{{url('/template/vendors/jquery/js/jquery.min.js')}}"></script>
+<script src="{{url('/template/vendors/datatables.net/js/jquery.dataTables.js')}}"></script>
+<script src="{{url('/template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{url('/js/datatables.js')}}"></script>
 @endsection

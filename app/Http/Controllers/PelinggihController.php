@@ -87,6 +87,7 @@ class PelinggihController extends Controller
         $puras = Pura::all();
         $pelinggihs = Pelinggih::all();
         return view('pages.pelinggih.daftarPelinggih', compact('puras','pelinggihs'));
+        // return view('pages.pelinggih.testdatatables');
     }
 
     /**
@@ -100,30 +101,52 @@ class PelinggihController extends Controller
         // $pelinggihs = Pelinggih::all();
         $pelinggihs = DB::table('pelinggihs')
             ->where('pura_id', '=', $id)->get();
+        // $selected = DB::table('pelinggihs')
+        //     ->where('id', '=', $id)->get();
         return view('pages.pelinggih.listPelinggih', compact('puras','pelinggihs','puraid'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pelinggih $pelinggih)
+    public function edit($puraid, $id)
     {
-        //
+        $pura = Pura::find($puraid);
+        $pelinggih = Pelinggih::find($id);
+        return view('pages.pelinggih.editPelinggih', compact('pelinggih','pura'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pelinggih $pelinggih)
+    public function update(Request $request, $puraid, $id)
     {
-        //
+        // dd($request);
+
+        $this->validate($request,[
+            'nama' => 'required|string',
+            'keterangan' => 'required',
+        ]);
+        $pura = Pura::find($puraid);
+        $pelinggih = Pelinggih::find($id);
+        $pelinggih->update([
+            'nama' => $request->nama,
+            'keterangan' => $request->keterangan
+        ]);        
+
+        return redirect()->to($puraid.'/daftarpelinggih')->with('success','Berhasil edit pelinggih');;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pelinggih $pelinggih)
+    public function destroy($puraid, $id)
     {
-        //
+        $pura = Pura::find($puraid);
+        Foto::where('pelinggih_id',$id)->delete();
+        $pelinggih = Pelinggih::find($id);
+        $pelinggih->delete();
+
+        return redirect()->to($puraid.'/daftarpelinggih')->with('success','Berhasil hapus pelinggih');;
     }
 }
