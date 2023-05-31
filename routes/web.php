@@ -49,5 +49,6 @@ Route::get('/daftarpengurus', [PengurusController::class, 'show'])->name('daftar
 Route::get('/{id}/daftarpengurus', [PengurusController::class, 'showlist'])->name('daftarlistpengurus');
 Route::get('/{id}/detailpengurus', [PengurusController::class, 'detail'])->name('detailpengurus');
 Route::post('/{id}/createpengurus', [PengurusController::class, 'store'])->name('createpengurus');
-Route::post('/{id}/editpengurus', [PengurusController::class, 'update'])->name('updatepengurus'); 
-Route::get('/{id}/deletepengurus', [PengurusController::class, 'destroy'])->name('deletepengurus'); 
+Route::get('/{puraid}/{id}/editpengurus', [PengurusController::class, 'edit'])->name('editpengurus');
+Route::post('/{puraid}/{id}/updatepengurus', [PengurusController::class, 'update'])->name('updatepengurus');
+Route::get('/{puraid}/{id}/deletepengurus', [PengurusController::class, 'destroy'])->name('deletepengurus'); 
