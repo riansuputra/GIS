@@ -11,19 +11,52 @@ var markerClusters = L.markerClusterGroup().addTo(map);
 
 var isOnDrag = false;
 
-var myIcon = L.icon({
-    iconUrl: '/foto/icon-temple.png',
-    iconSize: [50, 40],
-    iconAnchor: [20, 40],
+const puraIcon = L.Icon.extend({
+    options: {
+        iconSize:     [40, 40],
+        iconAnchor:   [20, 40],
+    }
 });
 
+const swaginaIcon = new puraIcon({iconUrl: '/foto/swaginaIcon.png'});
+const kawitanIcon = new puraIcon({iconUrl: '/foto/kawitanIcon.png'});
+const tigaIcon = new puraIcon({iconUrl: '/foto/tigaIcon.png'});
+const jagatIcon = new puraIcon({iconUrl: '/foto/jagatIcon.png'});
+
 puras.forEach(function (pura, index) {
-    markers.push(
-        new L.Marker([pura.lat, pura.lng], {
-            icon: myIcon,
-            draggable: false,
-        })
-    );
+    if(pura.jenis == "Kawitan") {
+
+        markers.push(
+            new L.Marker([pura.lat, pura.lng], {
+                icon: kawitanIcon,
+                draggable: false,
+            })
+        );
+    } else if(pura.jenis == "Swagina") {
+
+        markers.push(
+            new L.Marker([pura.lat, pura.lng], {
+                icon: swaginaIcon,
+                draggable: false,
+            })
+        );
+    } else if(pura.jenis == "Kahyangan Tiga") {
+
+        markers.push(
+            new L.Marker([pura.lat, pura.lng], {
+                icon: tigaIcon,
+                draggable: false,
+            })
+        );
+    } else if(pura.jenis == "Kahyangan Jagat") {
+
+        markers.push(
+            new L.Marker([pura.lat, pura.lng], {
+                icon: jagatIcon,
+                draggable: false,
+            })
+        );
+    }
     markerClusters.addLayer(L.layerGroup(markers));
 
 });
@@ -31,6 +64,7 @@ puras.forEach(function (pura, index) {
 map.on('click', function(e) {
     
     // document.getElementById("buttonAddModal").click();
+    // alert(puras);
     document.getElementById("lat").value = e.latlng.lat;
     document.getElementById("lng").value = e.latlng.lng;
     markers = new L.Marker(e.latlng, { icon: myIcon }).addTo(map);
