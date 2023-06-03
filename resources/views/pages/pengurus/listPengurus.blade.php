@@ -42,7 +42,7 @@
                     </thead>
                     <tbody>
                         @foreach($penguruses as $pengurus)
-                        <tr>
+                        <tr class="align-middle">
                             <td style="width:5%; text-align: center">{{ $loop->iteration }}</td>
                             <td style="width:30%;">{{$pengurus->nama}}</td>
                             <td style="width:15%;">{{$pengurus->sebagai}}</td>

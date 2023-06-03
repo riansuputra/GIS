@@ -17,18 +17,18 @@
                 <table id="datatable" class="table table-bordered border datatable">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th style="text-align: center">No</th>
                             <th>Nama Pura</th>
                             <th>Jenis Pura</th>
                             <th>Piodalan</th>
                             <th>Alamat</th>
-                            <th>Action</th>
+                            <th style="text-align: center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($puras as $pura)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
+                        <tr class="align-middle">
+                            <td style="width:5%; text-align: center">{{ $loop->iteration }}</td>
                             <td>{{$pura->nama}}</td>
                             <td>{{$pura->jenis}}</td>
                             @if(!($pura->sasih))
@@ -37,8 +37,43 @@
                                 <td>Sasih {{$pura->sasih}}</td>
                             @endif
                             <td>{{$pura->alamat}}</td>
-                            <td>test</td>
+                            <td style="width:10%; text-align: center">
+                                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                    <a data-mdb-ripple-duration=0 class="btn btn-success" href="#">
+                                        <svg class="icon">
+                                            <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-magnifying-glass')}}"></use>
+                                        </svg>
+                                    </a>
+                                    <a data-mdb-ripple-duration=0 class="btn btn-info" href="/{{$pura->id}}/editpura">
+                                        <svg class="icon">
+                                            <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-pencil')}}"></use>
+                                        </svg>
+                                    </a>
+                                    <a data-mdb-ripple-duration=0 data-coreui-toggle="modal" data-coreui-target="#staticBackdropLive" class="btn btn-danger" >
+                                        <svg class="icon">
+                                            <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-trash')}}"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
+                        <div class="modal fade" id="staticBackdropLive" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" style="width:20%;">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center">
+                                        <h5 class="modal-title w-100" id="exampleModalCenterTitle">Info</h5>
+                                        <button class="btn-close" type="button" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <p style="margin-bottom: 0">Apakah anda yakin ingin menghapus pura?</p>
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <a data-mdb-ripple-duration=0 href="" class="btn btn-primary" style="width: 30%" type="button">Ya</a>
+                                        <a data-mdb-ripple-duration=0 class="btn btn-secondary" style="width: 30%" type="button" data-coreui-dismiss="modal">Tidak</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         @endforeach
                     </tbody>
                 </table>

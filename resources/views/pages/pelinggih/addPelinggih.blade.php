@@ -49,7 +49,7 @@
                     <label for="formFile" class="form-label">Tambah Foto :</label>
                     <input class="form-control" name="fotos[]" type="file" id="fotos" multiple>
                 </div>
-                <button data-mdb-ripple-duration=0 class="btn btn-success mb-3" type="submit">Tambah</button>
+                <button data-mdb-ripple-duration=0 class="btn btn-success mb-3 text-light" type="submit">Tambah</button>
                 </form>
             </div>
         </div>

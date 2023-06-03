@@ -32,7 +32,8 @@ Route::get('/tambahpura', [PuraController::class, 'create'])->name('tambahpura')
 Route::get('/daftarpura', [PuraController::class, 'show'])->name('daftarpura');
 Route::get('/{id}/detailpura', [PuraController::class, 'detail'])->name('detailpura');
 Route::post('create', [PuraController::class, 'store'])->name('createpura');
-Route::post('/{id}/editpura', [PuraController::class, 'update'])->name('updatepura'); 
+Route::get('/{id}/editpura', [PuraController::class, 'edit'])->name('editpura'); 
+Route::post('/{id}/updatepura', [PuraController::class, 'update'])->name('updatepura'); 
 Route::get('/{id}/deletepura', [PuraController::class, 'destroy'])->name('deletepura'); 
     
 Route::get('/tambahpelinggih', [PelinggihController::class, 'create'])->name('tambahpelinggih');

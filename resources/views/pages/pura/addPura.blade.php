@@ -176,7 +176,7 @@
                     </div>
                     <input type="text" id="lat" name="lat" class="form-control" hidden value="{{ old('lat') }}"/>
                     <input type="text" id="lng" name="lng" class="form-control" hidden value="{{ old('lng') }}"/>
-                    <button data-mdb-ripple-duration=0 class="btn btn-success" type="submit">Tambah</button>
+                    <button data-mdb-ripple-duration=0 class="btn btn-success text-light" type="submit">Tambah</button>
                     </form>
                 </div>
             </div>
@@ -184,9 +184,14 @@
             <div class="col">
                 <div id="map" style="height: 610px">               
                 <script type="text/javascript">
-                let puras = <?php echo json_encode($puras); ?>;
-            </script>
-                    <script type="text/javascript" src="{{url('js/leaflet.js')}}"></script>         
+                    let puras = <?php echo json_encode($puras); ?>;
+                    var country;
+                    $('select').on('change', function() {
+                        country = this.value;
+                        alert(country);
+                    });
+                </script>
+                    <script type="text/javascript" src="{{url('js/leafletjs.js')}}"></script>         
                 </div>
             </div>
         </div>

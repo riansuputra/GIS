@@ -120,9 +120,12 @@ class PuraController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pura $pura)
+    public function edit($id)
     {
-        //
+        $puras = DB::table('puras')->get();
+        $pura = Pura::find($id);
+
+        return view('pages.pura.editPura', compact('puras','pura'));
     }
 
     /**

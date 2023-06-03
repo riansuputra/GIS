@@ -40,7 +40,7 @@
                     </thead>
                     <tbody>
                         @foreach($pelinggihs as $pelinggih)
-                        <tr>
+                        <tr class="align-middle">
                             <td style="width:5%; text-align: center">{{ $loop->iteration }}</td>
                             <td style="width:30%">{{$pelinggih->nama}}</td>
                             <td style="width:30%">{{$pelinggih->keterangan}}</td>
