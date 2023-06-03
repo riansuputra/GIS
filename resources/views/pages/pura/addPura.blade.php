@@ -43,7 +43,7 @@
                         @endif
                     </div>
                     <div class="mb-2 mt-4">
-                        <label class="form-label" for="jenis_piodalan">Piilh Jenis Piodalan :&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                        <label class="form-label" for="jenis_piodalan">Pilih Jenis Piodalan :&nbsp&nbsp&nbsp&nbsp&nbsp</label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio1" value="wuku">
                             <label class="form-check-label" for="inlineRadio1">Wuku</label>
@@ -188,10 +188,10 @@
                     var country;
                     $('select').on('change', function() {
                         country = this.value;
-                        alert(country);
+                        // alert(country);
                     });
                 </script>
-                    <script type="text/javascript" src="{{url('js/leafletjs.js')}}"></script>         
+                    <script type="text/javascript" src="{{url('js/leaflet-add.js')}}"></script>         
                 </div>
             </div>
         </div>
