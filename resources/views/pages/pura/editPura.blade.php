@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Pura')
+@section('title', 'Edit Pura')
 
 @section('breadcrumb')
-<li class="breadcrumb-item active"><span>Tambah Pura</span></li>
+<li class="breadcrumb-item active"><a href="{{route('daftarpura')}}">Daftar Pura</a></li>
+<li class="breadcrumb-item"><span>Edit Pura</span></li>
 @endsection
 
 @section('content')
@@ -12,11 +13,11 @@
 </button>
 <div class="row">
     <div class="card mb-4">
-        <div class="card-header row"><strong>Tambah Data Pura</strong></div>
+        <div class="card-header row"><strong>Edit Data Pura</strong></div>
         <div class="card-body row">
             <div class="col">
                 <div class="tab-content rounded-bottom">
-                    <form method="POST" action="{{ url('create') }}" id="formCreate" enctype="multipart/form-data">
+                    <form method="POST" action="/{{$pura->id}}/updatepura" id="formCreate" enctype="multipart/form-data">
                         @csrf
                     <div class="mb-3">
                         <label class="form-label" for="nama">Nama Pura :</label>
@@ -27,38 +28,74 @@
                             </div>
                         @endif
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="jenis">Jenis Pura :</label>
-                        <select class="form-select @error('jenis') is-invalid @enderror" id="jenis" name="jenis" aria-label="Default select example" value="{{ $pura->jenis }}">
-                            <option @if ($pura->jenis == 'Swagina') selected="selected" @endif value="Swagina">Swagina</option>
-                            <option @if ($pura->jenis == 'Kawitan') selected="selected" @endif value="Kawitan">Kawitan</option>
-                            <option @if ($pura->jenis == 'Kahyangan Tiga') selected="selected" @endif value="Kahyangan Tiga">Kahyangan Tiga</option>
-                            <option @if ($pura->jenis == 'Kahyangan Jagat') selected="selected" @endif value="Kahyangan Jagat">Kahyangan Jagat</option>
-                        </select>
-                        @if ($errors->has('jenis'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('jenis') }}
-                            </div>
-                        @endif
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class="form-label" for="jenis">Jenis Pura :</label>
+                            <select class="form-select @error('jenis') is-invalid @enderror" id="jenis" name="jenis" aria-label="Default select example" value="{{ $pura->jenis }}">
+                                <option @if ($pura->jenis == 'Swagina') selected="selected" @endif value="Swagina">Swagina</option>
+                                <option @if ($pura->jenis == 'Kawitan') selected="selected" @endif value="Kawitan">Kawitan</option>
+                                <option @if ($pura->jenis == 'Kahyangan Tiga') selected="selected" @endif value="Kahyangan Tiga">Kahyangan Tiga</option>
+                                <option @if ($pura->jenis == 'Kahyangan Jagat') selected="selected" @endif value="Kahyangan Jagat">Kahyangan Jagat</option>
+                            </select>
+                            @if ($errors->has('jenis'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('jenis') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-3">
+                            <label class="form-label" for="lat">Latitude :</label>
+                            <input type="text" id="lat" name="lat" class="form-control" value="{{ $pura->lat }}" readonly/>
+                        </div>
+                        <div class="col-3">
+                            <label class="form-label" for="lng">Longitude :</label>
+                            <input type="text" id="lng" name="lng" class="form-control" value="{{ $pura->lng }}" readonly/>
+                        </div>
                     </div>
-                    <div class="mb-2 mt-4">
+                    <div class="row mb-3 align-items-center">
                         <label class="form-label" for="jenis_piodalan">Piilh Jenis Piodalan :&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio1" value="wuku" @if ($pura->jenis_piodalan == 'Wuku') checked="checked" @endif>
-                            <label class="form-check-label" for="inlineRadio1">Wuku</label>
+                        <div class="col-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio2" value="sasih" @if ($pura->jenis_piodalan == 'Sasih') checked="checked" @endif>
+                                <label class="form-check-label" for="inlineRadio2">Sasih</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio2" value="sasih" @if ($pura->jenis_piodalan == 'Sasih') checked="checked" @endif>
-                            <label class="form-check-label" for="inlineRadio2">Sasih</label>
+                        <div class="col">
+                            <select class="form-select @error('sasih') is-invalid @enderror" id="sasih" name="sasih" aria-label="Default select example" value="{{ $pura->sasih }}">
+                                <option selected>Pilih Sasih</option>
+                                <option @if ($pura->sasih == 'Kasa') selected="selected" @endif value="Kasa">Kasa</option>
+                                <option @if ($pura->sasih == 'Karo') selected="selected" @endif value="Karo">Karo</option>
+                                <option @if ($pura->sasih == 'Katiga') selected="selected" @endif value="Katiga">Katiga</option>
+                                <option @if ($pura->sasih == 'Kapat') selected="selected" @endif value="Kapat">Kapat</option>
+                                <option @if ($pura->sasih == 'Kalima') selected="selected" @endif value="Kalima">Kalima</option>
+                                <option @if ($pura->sasih == 'Kanam') selected="selected" @endif value="Kanam">Kanam</option>
+                                <option @if ($pura->sasih == 'Kapitu') selected="selected" @endif value="Kapitu">Kapitu</option>
+                                <option @if ($pura->sasih == 'Kawolu') selected="selected" @endif value="Kawolu">Kawolu</option>
+                                <option @if ($pura->sasih == 'Kasanga') selected="selected" @endif value="Kasanga">Kasanga</option>
+                                <option @if ($pura->sasih == 'Kadasa') selected="selected" @endif value="Kadasa">Kadasa</option>
+                                <option @if ($pura->sasih == 'Jiyestha') selected="selected" @endif value="Jiyestha">Jiyestha</option>
+                                <option @if ($pura->sasih == 'Sadha') selected="selected" @endif value="Sadha">Sadha</option>
+                            </select>
+                            @if ($errors->has('sasih'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('sasih') }}
+                                </div>
+                            @endif
                         </div>
+                       
                         @if ($errors->has('jenis_piodalan'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('jenis_piodalan') }}
                             </div>
                         @endif
                     </div>
-                    <div class="row mb-3">
-                        <label class="form-label" for="wuku">Berdasarkan Wuku :</label>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio1" value="wuku" @if ($pura->jenis_piodalan == 'Wuku') checked="checked" @endif>
+                                <label class="form-check-label" for="inlineRadio1">Wuku</label>
+                            </div>
+                        </div>
                         <div class="col">
                             <select class="form-select @error('sapta_wara') is-invalid @enderror" id="sapta_wara" name="sapta_wara" aria-label="Default select example" value="{{ $pura->sapta_wara }}">
                                 <option selected>Pilih Sapta Wara</option>
@@ -133,29 +170,6 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="sasih">Berdasarkan Sasih :</label>
-                        <select class="form-select @error('sasih') is-invalid @enderror" id="sasih" name="sasih" aria-label="Default select example" value="{{ $pura->sasih }}">
-                            <option selected>Pilih Sasih</option>
-                            <option @if ($pura->sasih == 'Kasa') selected="selected" @endif value="Kasa">Kasa</option>
-                            <option @if ($pura->sasih == 'Karo') selected="selected" @endif value="Karo">Karo</option>
-                            <option @if ($pura->sasih == 'Katiga') selected="selected" @endif value="Katiga">Katiga</option>
-                            <option @if ($pura->sasih == 'Kapat') selected="selected" @endif value="Kapat">Kapat</option>
-                            <option @if ($pura->sasih == 'Kalima') selected="selected" @endif value="Kalima">Kalima</option>
-                            <option @if ($pura->sasih == 'Kanam') selected="selected" @endif value="Kanam">Kanam</option>
-                            <option @if ($pura->sasih == 'Kapitu') selected="selected" @endif value="Kapitu">Kapitu</option>
-                            <option @if ($pura->sasih == 'Kawolu') selected="selected" @endif value="Kawolu">Kawolu</option>
-                            <option @if ($pura->sasih == 'Kasanga') selected="selected" @endif value="Kasanga">Kasanga</option>
-                            <option @if ($pura->sasih == 'Kadasa') selected="selected" @endif value="Kadasa">Kadasa</option>
-                            <option @if ($pura->sasih == 'Jiyestha') selected="selected" @endif value="Jiyestha">Jiyestha</option>
-                            <option @if ($pura->sasih == 'Sadha') selected="selected" @endif value="Sadha">Sadha</option>
-                        </select>
-                        @if ($errors->has('sasih'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('sasih') }}
-                            </div>
-                        @endif
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label" for="alamat">Alamat Pura :</label>
                         <input class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" type="text" placeholder="Alamat Pura" value="{{ $pura->alamat }}">
                         @if ($errors->has('alamat'))
@@ -173,8 +187,6 @@
                             </div>
                         @endif
                     </div>
-                    <input type="text" id="lat" name="lat" class="form-control" hidden value="{{ $pura->lat }}"/>
-                    <input type="text" id="lng" name="lng" class="form-control" hidden value="{{ $pura->lng }}"/>
                     <button data-mdb-ripple-duration=0 class="btn btn-success text-light" type="submit">Simpan</button>
                     </form>
                 </div>
@@ -184,8 +196,13 @@
                 <div id="map" style="height: 610px">               
                 <script type="text/javascript">
                 let puras = <?php echo json_encode($pura); ?>;
+                    var country;
+                    $('#jenis').on('change', function() {
+                        country = this.value;
+                        // alert(country);
+                    });
             </script>
-                    <script type="text/javascript" src="{{url('js/leaflet.js')}}"></script>         
+                    <script type="text/javascript" src="{{url('js/leaflet-edit.js')}}"></script>         
                 </div>
             </div>
         </div>

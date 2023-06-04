@@ -122,6 +122,7 @@ class PuraController extends Controller
      */
     public function edit($id)
     {
+        // dd($id);
         $puras = DB::table('puras')->get();
         $pura = Pura::find($id);
 
@@ -131,9 +132,68 @@ class PuraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pura $pura)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nama' => 'required|string',
+            'jenis' => 'required',
+            'jenis_piodalan' => 'required',
+            'sapta_wara' => 'nullable',
+            'panca_wara' => 'nullable',
+            'wuku' => 'nullable',
+            'sasih' => 'nullable',
+            'alamat' => 'required|string',
+            'lat' => 'required',
+            'lng' => 'required'
+        ]);
+        $pura = Pura::find($id);
+
+        $oldWuku = Pura::where('id', '=', $id, 'and')
+                        ->where('jenis_piodalan', '=', 'Wuku')
+                        ->update(['sapta_wara' => null, 'panca_wara' => null, 'wuku' => null]);
+
+        $oldSasih = Pura::where('id', '=', $id, 'and')
+                        ->where('jenis_piodalan','=','sasih')
+                        ->update(['sasih' => null]);
+
+        $pura->update([
+            'nama' => $request->nama,
+            'jenis' => $request->jenis,
+            'jenis_piodalan' => $request->jenis_piodalan,
+            'sapta_wara' => $request->sapta_wara,
+            'panca_wara' => $request->panca_wara,
+            'wuku' => $request->wuku,
+            'sasih' => $request->sasih,
+            'alamat' => $request->alamat,
+            'lat' => $request->lat,
+            'lng' => $request->lng
+        ]);        
+
+        $this->validate($request, [
+            'fotos.*' => 'required|file|image',
+        ]);
+
+        if ($id) {
+            $fotos = [];
+            if(!empty($request->file('fotos'))) {
+                foreach($request->file('fotos') as $foto){
+                    if($foto->isValid()){
+                        $nama_image = time()."_".$foto->getClientOriginalName();
+                        // Storage::putFileAs('public', $file, $nama_image);
+                        $path = public_path('/foto/pura');
+                        $foto->move($path, $nama_image);
+                        $fotos[] = [
+                            'pura_id' => $id,
+                            'is_thumbnail' => 1,
+                            'foto' => $nama_image,
+                            'type' => 'Pura',
+                        ];
+                    }
+                }
+            }
+            Foto::insert($fotos);
+        }
+        return redirect()->route('daftarpura')->with('success','Berhasil edit pura');;
     }
 
     /**

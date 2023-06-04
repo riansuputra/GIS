@@ -27,39 +27,74 @@
                             </div>
                         @endif
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="jenis">Jenis Pura :</label>
-                        <select class="form-select @error('jenis') is-invalid @enderror" id="jenis" name="jenis" aria-label="Default select example" value="{{ old('jenis') }}">
-                            <option value="">Pilih Jenis Pura</option>
-                            <option value="Swagina">Swagina</option>
-                            <option value="Kawitan">Kawitan</option>
-                            <option value="Kahyangan Tiga">Kahyangan Tiga</option>
-                            <option value="Kahyangan Jagat">Kahyangan Jagat</option>
-                        </select>
-                        @if ($errors->has('jenis'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('jenis') }}
-                            </div>
-                        @endif
-                    </div>
-                    <div class="mb-2 mt-4">
-                        <label class="form-label" for="jenis_piodalan">Pilih Jenis Piodalan :&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio1" value="wuku">
-                            <label class="form-check-label" for="inlineRadio1">Wuku</label>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class="form-label" for="jenis">Jenis Pura :</label>
+                            <select class="form-select @error('jenis') is-invalid @enderror" id="jenis" name="jenis" aria-label="Default select example" value="{{ old('jenis') }}">
+                                <option value="">Pilih Jenis Pura</option>
+                                <option value="Swagina">Swagina</option>
+                                <option value="Kawitan">Kawitan</option>
+                                <option value="Kahyangan Tiga">Kahyangan Tiga</option>
+                                <option value="Kahyangan Jagat">Kahyangan Jagat</option>
+                            </select>
+                            @if ($errors->has('jenis'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('jenis') }}
+                                </div>
+                            @endif
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio2" value="sasih">
-                            <label class="form-check-label" for="inlineRadio2">Sasih</label>
+                        <div class="col-3">
+                            <label class="form-label" for="lat">Latitude :</label>
+                            <input type="text" id="lat" name="lat" class="form-control" value="{{ old('lat') }}" readonly/>
+                        </div>
+                        <div class="col-3">
+                            <label class="form-label" for="lng">Longitude :</label>
+                            <input type="text" id="lng" name="lng" class="form-control" value="{{ old('lng') }}" readonly/>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <label class="form-label" for="jenis_piodalan">Pilih Jenis Piodalan :&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                        <div class="col-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio2" value="sasih">
+                                <label class="form-check-label" for="inlineRadio2">Sasih</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <select class="form-select @error('sasih') is-invalid @enderror" id="sasih" name="sasih" aria-label="Default select example" value="{{ old('sasih') }}">
+                                <option value="">Pilih Sasih</option>
+                                <option value="Kasa">Kasa</option>
+                                <option value="Karo">Karo</option>
+                                <option value="Katiga">Katiga</option>
+                                <option value="Kapat">Kapat</option>
+                                <option value="Kalima">Kalima</option>
+                                <option value="Kanam">Kanam</option>
+                                <option value="Kapitu">Kapitu</option>
+                                <option value="Kawolu">Kawolu</option>
+                                <option value="Kasanga">Kasanga</option>
+                                <option value="Kadasa">Kadasa</option>
+                                <option value="Jiyestha">Jiyestha</option>
+                                <option value="Sadha">Sadha</option>
+                            </select>
+                            @if ($errors->has('sasih'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('sasih') }}
+                                </div>
+                            @endif
                         </div>
                         @if ($errors->has('jenis_piodalan'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('jenis_piodalan') }}
-                            </div>
+                        <div class="invalid-feedback">
+                            {{ $errors->first('jenis_piodalan') }}
+                        </div>
                         @endif
                     </div>
-                    <div class="row mb-3">
-                        <label class="form-label" for="wuku">Berdasarkan Wuku :</label>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-2">
+                            <div class="form-check form-check-inline text-center">
+                                <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio1" value="wuku">
+                                <label class="form-check-label" for="inlineRadio1">Wuku</label>
+                            </div>
+                        </div>
                         <div class="col">
                             <select class="form-select @error('sapta_wara') is-invalid @enderror" id="sapta_wara" name="sapta_wara" aria-label="Default select example" value="{{ old('sapta_wara') }}">
                                 <option value="">Pilih Sapta Wara</option>
@@ -134,29 +169,6 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="sasih">Berdasarkan Sasih :</label>
-                        <select class="form-select @error('sasih') is-invalid @enderror" id="sasih" name="sasih" aria-label="Default select example" value="{{ old('sasih') }}">
-                            <option value="">Pilih Sasih</option>
-                            <option value="Kasa">Kasa</option>
-                            <option value="Karo">Karo</option>
-                            <option value="Katiga">Katiga</option>
-                            <option value="Kapat">Kapat</option>
-                            <option value="Kalima">Kalima</option>
-                            <option value="Kanam">Kanam</option>
-                            <option value="Kapitu">Kapitu</option>
-                            <option value="Kawolu">Kawolu</option>
-                            <option value="Kasanga">Kasanga</option>
-                            <option value="Kadasa">Kadasa</option>
-                            <option value="Jiyestha">Jiyestha</option>
-                            <option value="Sadha">Sadha</option>
-                        </select>
-                        @if ($errors->has('sasih'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('sasih') }}
-                            </div>
-                        @endif
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label" for="alamat">Alamat Pura :</label>
                         <input class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" type="text" placeholder="Alamat Pura" value="{{ old('alamat') }}">
                         @if ($errors->has('alamat'))
@@ -174,8 +186,7 @@
                             </div>
                         @endif
                     </div>
-                    <input type="text" id="lat" name="lat" class="form-control" hidden value="{{ old('lat') }}"/>
-                    <input type="text" id="lng" name="lng" class="form-control" hidden value="{{ old('lng') }}"/>
+                    
                     <button data-mdb-ripple-duration=0 class="btn btn-success text-light" type="submit">Tambah</button>
                     </form>
                 </div>
@@ -186,7 +197,7 @@
                 <script type="text/javascript">
                     let puras = <?php echo json_encode($puras); ?>;
                     var country;
-                    $('select').on('change', function() {
+                    $('#jenis').on('change', function() {
                         country = this.value;
                         // alert(country);
                     });

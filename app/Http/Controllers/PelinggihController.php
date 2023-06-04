@@ -150,3 +150,4 @@ class PelinggihController extends Controller
         return redirect()->to($puraid.'/daftarpelinggih')->with('success','Berhasil hapus pelinggih');;
     }
 }
+
