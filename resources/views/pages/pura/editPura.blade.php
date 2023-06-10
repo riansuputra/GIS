@@ -196,11 +196,12 @@
                 <div id="map" style="height: 610px">               
                 <script type="text/javascript">
                 let puras = <?php echo json_encode($pura); ?>;
-                    var country;
+                    var jenis;
                     $('#jenis').on('change', function() {
-                        country = this.value;
+                        jenis = this.value;
                         // alert(country);
                     });
+                    console.log(puras.lat);
             </script>
                     <script type="text/javascript" src="{{url('js/leaflet-edit.js')}}"></script>         
                 </div>

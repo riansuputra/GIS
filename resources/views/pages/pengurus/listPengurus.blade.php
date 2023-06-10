@@ -107,6 +107,7 @@
     $('#pura_id').on('change', function() {
         var id = this.value;
         window.location.href = "http://localhost:8000/" + id + "/daftarpengurus"
+        // window.location.href = "htpp://gis-leaflet-rian.azurewebsites.net" + id + "/daftarpengurus"
     });
 </script>
 

@@ -109,12 +109,13 @@ class PuraController extends Controller
         $fotos = Foto::all();
         $penguruses = Pengurus::all();
         $pelinggihs = Pelinggih::all();
+        $cek = Pelinggih::where("pura_id", $id)->exists();
 
         // $pemangku = DB::table('penguruses')
         //     ->select('id')
         //     ->where('pura_id', '=', $id)->get();
 
-        return view('pages.pura.detailPura', compact('puras','fotos','penguruses','pelinggihs'));
+        return view('pages.pura.detailPura', compact('puras','fotos','penguruses','pelinggihs','cek'));
     }
 
     /**
@@ -137,24 +138,27 @@ class PuraController extends Controller
         $this->validate($request,[
             'nama' => 'required|string',
             'jenis' => 'required',
-            'jenis_piodalan' => 'required',
+            'jenis_piodalan' => 'required|in:wuku,sasih',
             'sapta_wara' => 'nullable',
             'panca_wara' => 'nullable',
-            'wuku' => 'nullable',
-            'sasih' => 'nullable',
+            'wuku' => 'nullable|required_without:sasih',
+            'sasih' => 'nullable|required_without:wuku',
             'alamat' => 'required|string',
             'lat' => 'required',
             'lng' => 'required'
         ]);
         $pura = Pura::find($id);
 
-        $oldWuku = Pura::where('id', '=', $id, 'and')
-                        ->where('jenis_piodalan', '=', 'Wuku')
-                        ->update(['sapta_wara' => null, 'panca_wara' => null, 'wuku' => null]);
+        if($request->jenis_piodalan == 'wuku'){
+            $oldSasih = Pura::where('id', '=', $id, 'and')
+                            ->where('jenis_piodalan','=','sasih')
+                            ->update(['sasih' => null]);
+        } else {
+            $oldWuku = Pura::where('id', '=', $id, 'and')
+                            ->where('jenis_piodalan', '=', 'Wuku')
+                            ->update(['sapta_wara' => null, 'panca_wara' => null, 'wuku' => null]);
+        }
 
-        $oldSasih = Pura::where('id', '=', $id, 'and')
-                        ->where('jenis_piodalan','=','sasih')
-                        ->update(['sasih' => null]);
 
         $pura->update([
             'nama' => $request->nama,
@@ -199,8 +203,15 @@ class PuraController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pura $pura)
+    public function destroy($id)
     {
-        //
+        Foto::where('pura_id',$id)->delete();
+        Pelinggih::where('pura_id',$id)->delete();
+        Pengurus::where('pura_id',$id)->delete();
+        $pura = Pura::find($id);
+        $pura->delete();
+
+        return redirect()->route('index')->with('success','Berhasil hapus pura');
+
     }
 }

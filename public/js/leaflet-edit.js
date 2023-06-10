@@ -23,33 +23,73 @@ const tigaIcon = new puraIcon({iconUrl: '/foto/tigaIcon.png'});
 const jagatIcon = new puraIcon({iconUrl: '/foto/jagatIcon.png'});
 
 var marker = null;
+var lat = 0.0;
+var lng = 0.0;
 
-map.on('click', function (e) {
-    document.getElementById("lat").value = e.latlng.lat;
-    document.getElementById("lng").value = e.latlng.lng;
-    
-    // alert(e.latlng);
+var onDrag = function(e) {
+    var latlng = marker.getLatLng();
+    document.getElementById("lat").value = latlng.lat;
+    document.getElementById("lng").value = latlng.lng;
+};
 
+if (puras.jenis == "Kawitan") {
+    var marker = new L.Marker([puras.lat, puras.lng], {
+        icon: kawitanIcon,
+        draggable: false,
+    }).addTo(map);
+} else if (puras.jenis == "Swagina") {
+    var marker = new L.Marker([puras.lat, puras.lng], {
+        icon: swaginaIcon,
+        draggable: false,
+    }).addTo(map);
+} else if (puras.jenis == "Kahyangan Tiga") {
+    var marker = new L.Marker([puras.lat, puras.lng], {
+        icon: tigaIcon,
+        draggable: false,
+    }).addTo(map);
+} else if (puras.jenis == "Kahyangan Jagat") {
+    var marker = new L.Marker([puras.lat, puras.lng], {
+        icon: jagatIcon,
+        draggable: false,
+    }).addTo(map);
+}
+
+var onClick = function(e) {
+    map.off('click', onclick);
+    // marker = L.marker(e.latlng, {draggable: true}).addTo(map);
     if (marker !== null) {
         map.removeLayer(marker);
     }
-    if (country == "Kawitan") {
+    if (jenis == "Kawitan") {
         marker = L.marker(e.latlng, {
-            icon: kawitanIcon
+            icon: kawitanIcon,
+            draggable: true
         }).addTo(map);
-    } else if (country == "Swagina"){
+    } else if (jenis == "Swagina"){
         marker = L.marker(e.latlng, {
-            icon: swaginaIcon
+            icon: swaginaIcon,
+            draggable: true
         }).addTo(map);
-    } else if (country == "Kahyangan Tiga"){
+    } else if (jenis == "Kahyangan Tiga"){
         marker = L.marker(e.latlng, {
-            icon: tigaIcon
+            icon: tigaIcon,
+            draggable: true
         }).addTo(map);
-    } else if (country == "Kahyangan Jagat"){
+    } else if (jenis == "Kahyangan Jagat"){
         marker = L.marker(e.latlng, {
-            icon: jagatIcon
+            icon: jagatIcon,
+            draggable: true
         }).addTo(map);
     } else {
         
     }
-});
+    lat = e.latlng.lat;
+    lng = e.latlng.lng;
+    document.getElementById("lat").value = e.latlng.lat;
+    document.getElementById("lng").value = e.latlng.lng;
+
+    marker.on('drag', onDrag);
+};
+
+map.on('click', onClick);
+

@@ -39,7 +39,7 @@
                             <td>{{$pura->alamat}}</td>
                             <td style="width:10%; text-align: center">
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                    <a data-mdb-ripple-duration=0 class="btn btn-success" href="#">
+                                    <a data-mdb-ripple-duration=0 class="btn btn-success" href="/{{$pura->id}}/detailpura">
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-magnifying-glass')}}"></use>
                                         </svg>

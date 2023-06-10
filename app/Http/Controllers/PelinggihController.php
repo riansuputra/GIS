@@ -147,7 +147,7 @@ class PelinggihController extends Controller
         $pelinggih = Pelinggih::find($id);
         $pelinggih->delete();
 
-        return redirect()->to($puraid.'/daftarpelinggih')->with('success','Berhasil hapus pelinggih');;
+        return redirect()->to($puraid.'/daftarpelinggih')->with('success','Berhasil hapus pelinggih');
     }
 }
 
