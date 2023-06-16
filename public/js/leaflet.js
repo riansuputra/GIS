@@ -18,6 +18,46 @@ const puraIcon = L.Icon.extend({
     }
 });
 
+function getColor(d) {
+    return d === 'Swagina' ? "btn-warning" :
+    d === 'Kawitan'  ? "btn-danger" :
+    d === 'Kahyangan Tiga'  ? "btn-primary" :
+    d === 'Kahyangan Jagat' ? "btn-dark" :
+                        "#ff7f00";
+}
+
+function style(feature) {
+    return {
+        weight: 1.5,
+        opacity: 1,
+        fillOpacity: 1,
+        radius: 6,
+        fillColor: getColor(feature.properties.TypeOfIssue),
+        color: "grey"
+
+    };
+}
+
+var legend = L.control({position: 'bottomleft'});
+    legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend mx-3 my-3');
+    labels = ['<strong>Jenis Pura</strong>'],
+    categories = ['Swagina','Kawitan','Kahyangan Tiga','Kahyangan Jagat'];
+
+    for (var i = 0; i < categories.length; i++) {
+
+            div.innerHTML += 
+            labels.push(
+                '<button type="button" class="btn ' + getColor(categories[i]) + ' rounded-pill"></button> ' +
+            (categories[i] ? categories[i] : '+'));
+
+        }
+        div.innerHTML = labels.join('<br>');
+    return div;
+    };
+    legend.addTo(map);
+
 const swaginaIcon = new puraIcon({iconUrl: '/foto/swaginaIcon.png'});
 const kawitanIcon = new puraIcon({iconUrl: '/foto/kawitanIcon.png'});
 const tigaIcon = new puraIcon({iconUrl: '/foto/tigaIcon.png'});

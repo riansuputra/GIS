@@ -135,4 +135,18 @@ class PengurusController extends Controller
 
         return redirect()->to($puraid.'/daftarpengurus')->with('success','Berhasil hapus pengurus');;
     }
+    public function detail($id)
+    {
+        $puras = Pura::all();
+        $fotos = Foto::all();
+        $penguruses = Pengurus::find($id);
+        $pelinggihs = Pelinggih::all();
+        $cek = Pelinggih::where("pura_id", $id)->exists();
+
+        // $pemangku = DB::table('penguruses')
+        //     ->select('id')
+        //     ->where('pura_id', '=', $id)->get();
+
+        return view('pages.pengurus.detailPengurus', compact('puras','fotos','penguruses','pelinggihs','cek'));
+    }
 }

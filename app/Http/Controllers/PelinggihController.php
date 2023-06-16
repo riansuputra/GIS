@@ -149,5 +149,19 @@ class PelinggihController extends Controller
 
         return redirect()->to($puraid.'/daftarpelinggih')->with('success','Berhasil hapus pelinggih');
     }
+
+    public function detail($id)
+    {
+        $puras = Pura::all();
+        $fotos = Foto::all();
+        $pelinggihs = Pelinggih::find($id);
+        $cek = Pelinggih::where("pura_id", $id)->exists();
+
+        // $pemangku = DB::table('penguruses')
+        //     ->select('id')
+        //     ->where('pura_id', '=', $id)->get();
+
+        return view('pages.pelinggih.detailPelinggih', compact('puras','fotos','pelinggihs','cek'));
+    }
 }
 

@@ -49,7 +49,7 @@
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-pencil')}}"></use>
                                         </svg>
                                     </a>
-                                    <a data-mdb-ripple-duration=0 data-coreui-toggle="modal" data-coreui-target="#staticBackdropLive" class="btn btn-danger" >
+                                    <a data-mdb-ripple-duration=0 href="/{{$pura->id}}/deletepura" class="btn btn-danger" >
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-trash')}}"></use>
                                         </svg>
@@ -57,6 +57,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                         <div class="modal fade" id="staticBackdropLive" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" style="width:20%;">
                                 <div class="modal-content">
@@ -68,13 +69,12 @@
                                         <p style="margin-bottom: 0">Apakah anda yakin ingin menghapus pura?</p>
                                     </div>
                                     <div class="modal-footer justify-content-center">
-                                        <a data-mdb-ripple-duration=0 href="" class="btn btn-primary" style="width: 30%" type="button">Ya</a>
+                                        <a data-mdb-ripple-duration=0 href="/{{$pura->id}}/deletepura" class="btn btn-primary" style="width: 30%" type="button">Ya</a>
                                         <a data-mdb-ripple-duration=0 class="btn btn-secondary" style="width: 30%" type="button" data-coreui-dismiss="modal">Tidak</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
                     </tbody>
                 </table>
             </div>

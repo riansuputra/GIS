@@ -71,7 +71,7 @@
                                 <td>{{$pengurus->tahun_mulai}}</td>
                                 <td>{{$pengurus->tahun_berakhir}}</td>
                                 <td>{{$pengurus->status}}</td>
-                                <td><button type="button" class="btn btn-primary"><span class="cil-contrast btn-icon mr-2"></span> Details</button></td>
+                                <td><a data-mdb-ripple-duration=0type="button" href="/{{$pengurus->id}}/detailpengurus"class="btn btn-primary"><span class="cil-contrast btn-icon mr-2"></span> Details</a></td>
                             </tr>
                             @endif
                             @endforeach
@@ -94,7 +94,7 @@
                             @foreach($pelinggihs as $pelinggih)
                             <tr>
                                 @if($pelinggih->pura_id == $puras->id)
-                                <td>{{ $loop->first }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{$pelinggih->nama}}</td>
                                 @foreach($fotos as $foto)
                                     @if($foto->type == "Pelinggih" && $foto->pura_id == $puras->id)
@@ -102,7 +102,7 @@
                                     @endif
                                 @endforeach
                                 <td>{{$pelinggih->keterangan}}</td>
-                                <td>test</td>
+                                <td><a data-mdb-ripple-duration=0type="button" href="/{{$pelinggih->id}}/detailpelinggih"class="btn btn-primary"><span class="cil-contrast btn-icon mr-2"></span> Details</a></td>
                             </tr>
                             @endif
                             @endforeach

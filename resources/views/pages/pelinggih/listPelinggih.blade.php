@@ -46,7 +46,7 @@
                             <td style="width:30%">{{$pelinggih->keterangan}}</td>
                             <td style="width:10%; text-align: center">
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                    <a data-mdb-ripple-duration=0 class="btn btn-success" href="#">
+                                    <a data-mdb-ripple-duration=0 class="btn btn-success" href="/{{$pelinggih->id}}/detailpelinggih">
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-magnifying-glass')}}"></use>
                                         </svg>
@@ -56,7 +56,7 @@
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-pencil')}}"></use>
                                         </svg>
                                     </a>
-                                    <a data-mdb-ripple-duration=0 data-coreui-toggle="modal" data-coreui-target="#staticBackdropLive" class="btn btn-danger" >
+                                    <a data-mdb-ripple-duration=0 href="/{{$pelinggih->pura_id}}/{{$pelinggih->id}}/deletepelinggih" class="btn btn-danger" >
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-trash')}}"></use>
                                         </svg>
