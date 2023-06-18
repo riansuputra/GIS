@@ -12,6 +12,10 @@ use App\Models\Pura;
 
 class PengurusController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth')->except('detail');;
+    }
     /**
      * Display a listing of the resource.
      */

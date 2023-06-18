@@ -16,19 +16,6 @@
         </div>
         <div class="card-body row">
             <div class="tab-content rounded-bottom">
-                <label class="form-label" for="pura_id">Pilih Pura :</label>
-                    <select class="form-select @error('pura_id') is-invalid @enderror" id="pura_id" name="pura_id" aria-label="Default select example" >
-                        <option>Pilih Pura</option>
-                        @foreach($puras as $pura)
-                            <option value="{{$pura->id}}">{{$pura->nama}}</option>
-                        @endforeach
-                    </select>
-                    @if ($errors->has('pura_id'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('pura_id') }}
-                        </div>
-                    @endif
-                <br>
                 <table id="datatable" class="table table-bordered border datatable">
                     <thead>
                         <tr>

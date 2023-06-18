@@ -14,7 +14,7 @@ class PelinggihController extends Controller
 {
     function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('detail');
     }
     /**
      * Display a listing of the resource.

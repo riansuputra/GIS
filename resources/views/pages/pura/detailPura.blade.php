@@ -11,7 +11,7 @@
 <div class="row">
     <div class="card mb-4">
 
-        <div class="card-header">
+        <div class="card-header row">
             <strong>{{$puras->nama}}</strong>
         </div>
 
@@ -85,7 +85,6 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Pelinggih</th>
-                                <th>Foto</th>
                                 <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
@@ -96,11 +95,6 @@
                                 @if($pelinggih->pura_id == $puras->id)
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{$pelinggih->nama}}</td>
-                                @foreach($fotos as $foto)
-                                    @if($foto->type == "Pelinggih" && $foto->pura_id == $puras->id)
-                                        <td align="center"><img src="{{url('foto/pelinggih/'.$foto->foto)}}" class="d-block w-80" alt="..." style="width:50%;height:80px"></td>
-                                    @endif
-                                @endforeach
                                 <td>{{$pelinggih->keterangan}}</td>
                                 <td><a data-mdb-ripple-duration=0type="button" href="/{{$pelinggih->id}}/detailpelinggih"class="btn btn-primary"><span class="cil-contrast btn-icon mr-2"></span> Details</a></td>
                             </tr>

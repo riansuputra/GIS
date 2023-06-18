@@ -233,10 +233,6 @@
             </div>
         </div>
 
-        <footer class="footer">
-            <div></div>
-            <div class="ms-auto">©2023</div>
-        </footer>
     </div>
     <!-- CoreUI and necessary plugins-->
     <script src="{{url('/template/vendors/@coreui/coreui/js/coreui.bundle.min.js')}}"></script>

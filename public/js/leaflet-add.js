@@ -17,9 +17,6 @@ const puraIcon = L.Icon.extend({
     }
 });
 
-const swaginaIcon = new puraIcon({iconUrl: '/foto/swaginaIcon.png'});
-const kawitanIcon = new puraIcon({iconUrl: '/foto/kawitanIcon.png'});
-const tigaIcon = new puraIcon({iconUrl: '/foto/tigaIcon.png'});
 const jagatIcon = new puraIcon({iconUrl: '/foto/jagatIcon.png'});
 
 var marker = null;
@@ -38,29 +35,13 @@ var onClick = function(e) {
     if (marker !== null) {
         map.removeLayer(marker);
     }
-    if (country == "Kawitan") {
-        marker = L.marker(e.latlng, {
-            icon: kawitanIcon,
-            draggable: true
-        }).addTo(map);
-    } else if (country == "Swagina"){
-        marker = L.marker(e.latlng, {
-            icon: swaginaIcon,
-            draggable: true
-        }).addTo(map);
-    } else if (country == "Kahyangan Tiga"){
-        marker = L.marker(e.latlng, {
-            icon: tigaIcon,
-            draggable: true
-        }).addTo(map);
-    } else if (country == "Kahyangan Jagat"){
-        marker = L.marker(e.latlng, {
+    
+    
+    marker = L.marker(e.latlng, {
             icon: jagatIcon,
             draggable: true
         }).addTo(map);
-    } else {
-        
-    }
+    
     lat = e.latlng.lat;
     lng = e.latlng.lng;
     document.getElementById("lat").value = e.latlng.lat;
