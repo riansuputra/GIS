@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('sapta_wara',['Redite','Soma','Anggara','Budha','Wrhaspati','Sukra','Saniscara'])->nullable();
             $table->enum('panca_wara',['Umanis','Paing','Pon','Wage','Kliwon'])->nullable();
             $table->enum('sasih',['Kasa','Karo','Katiga','Kapat','Kalima','Kanam','Kapitu','Kawolu','Kasanga','Kadasa','Jiyestha','Sadha'])->nullable();
+            $table->enum('bulan',['Purnaming','Tilem'])->nullable();
             $table->double('lat');
             $table->double('lng');
             $table->timestamps();

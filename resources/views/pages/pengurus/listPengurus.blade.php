@@ -12,11 +12,41 @@
         <div class="card-header row">
             @foreach($puraid as $pura_id)
                 <strong>{{$pura_id->nama}}</strong>
-            @endforeach
-        </div>
+            </div>
         <div class="card-body row">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a href="/{{$pura_id->id}}/detailpura">
+                            <button class="nav-link" data-coreui-toggle="tab" role="tab">
+                                <svg class="icon me-2">
+                                    <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-bank')}}"></use>
+                                </svg>Pura
+                            </button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/{{$pura_id->id}}/daftarpelinggih">
+                            <button class="nav-link" data-coreui-toggle="tab" role="tab">
+                                <svg class="icon me-2">
+                                    <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-building')}}"></use>
+                                </svg>Pelinggih
+                            </button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/{{$pura_id->id}}/daftarpengurus">
+                            <button class="nav-link active" data-coreui-toggle="tab" role="tab">
+                                <svg class="icon me-2">
+                                    <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
+                                </svg>Pengurus
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+            @endforeach
             <div class="tab-content rounded-bottom">
-                <table id="datatable" class="table table-bordered border datatable">
+                <div class="tab-pane p-3 active show" role="tabpanel" id="pengurus_">
+                    <table id="datatable" class="table table-bordered border datatable">
                     <thead>
                         <tr>
                             <th style="text-align: center">No</th>
@@ -28,9 +58,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php    
+                            $count = 1;
+                        @endphp
                         @foreach($penguruses as $pengurus)
+                        @if($pengurus->status == 'Aktif')
                         <tr class="align-middle">
-                            <td style="width:5%; text-align: center">{{ $loop->iteration }}</td>
+                            <td style="width:5%; text-align: center">{{ $count }}</td>
+                            @php
+                                $count++;
+                            @endphp
                             <td style="width:30%;">{{$pengurus->nama}}</td>
                             <td style="width:15%;">{{$pengurus->sebagai}}</td>
                             <td style="width:20%;">{{$pengurus->telepon}}</td>
@@ -78,9 +115,11 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                         @endforeach
                     </tbody>
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

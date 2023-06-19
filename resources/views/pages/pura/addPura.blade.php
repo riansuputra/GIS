@@ -82,6 +82,18 @@
                                 </div>
                             @endif
                         </div>
+                        <div class="col">
+                            <select class="form-select @error('bulan') is-invalid @enderror" id="bulan" name="bulan" aria-label="Default select example" value="{{ old('bulan') }}">
+                                <option value="">Pilih Bulan</option>
+                                <option value="Purnaming">Purnaming</option>
+                                <option value="Tilem">Tilem</option>
+                            </select>
+                            @if ($errors->has('bulan'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('bulan') }}
+                                </div>
+                            @endif
+                        </div>
                         @if ($errors->has('jenis_piodalan'))
                         <div class="invalid-feedback">
                             {{ $errors->first('jenis_piodalan') }}
@@ -94,38 +106,6 @@
                                 <input class="form-check-input @error('jenis_piodalan') is-invalid @enderror" type="radio" name="jenis_piodalan" id="inlineRadio1" value="wuku">
                                 <label class="form-check-label" for="inlineRadio1">Wuku</label>
                             </div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select @error('sapta_wara') is-invalid @enderror" id="sapta_wara" name="sapta_wara" aria-label="Default select example" value="{{ old('sapta_wara') }}">
-                                <option value="">Pilih Sapta Wara</option>
-                                <option value="Redite">Redite</option>
-                                <option value="Soma">Soma</option>
-                                <option value="Anggara">Anggara</option>
-                                <option value="Budha">Budha</option>
-                                <option value="Wrhaspati">Wrhaspati</option>
-                                <option value="Sukra">Sukra</option>
-                                <option value="Saniscara">Saniscara</option>
-                            </select>
-                            @if ($errors->has('sapta_wara'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('sapta_wara') }}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="col">
-                            <select class="form-select @error('panca_wara') is-invalid @enderror" id="panca_wara" name="panca_wara" aria-label="Default select example" value="{{ old('panca_wara') }}">
-                                <option value="">Pilih Panca Wara</option>
-                                <option value="Umanis">Umanis</option>
-                                <option value="Paing">Paing</option>
-                                <option value="Pon">Pon</option>
-                                <option value="Wage">Wage</option>
-                                <option value="Kliwon">Kliwon</option>
-                            </select>
-                            @if ($errors->has('panca_wara'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('panca_wara') }}
-                                </div>
-                            @endif
                         </div>
                         <div class="col">
                             <select class="form-select @error('wuku') is-invalid @enderror" id="wuku" name="wuku" aria-label="Default select example" value="{{ old('wuku') }}">
@@ -164,6 +144,38 @@
                             @if ($errors->has('wuku'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('wuku') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col">
+                            <select class="form-select @error('sapta_wara') is-invalid @enderror" id="sapta_wara" name="sapta_wara" aria-label="Default select example" value="{{ old('sapta_wara') }}">
+                                <option value="">Pilih Sapta Wara</option>
+                                <option value="Redite">Redite</option>
+                                <option value="Soma">Soma</option>
+                                <option value="Anggara">Anggara</option>
+                                <option value="Budha">Budha</option>
+                                <option value="Wrhaspati">Wrhaspati</option>
+                                <option value="Sukra">Sukra</option>
+                                <option value="Saniscara">Saniscara</option>
+                            </select>
+                            @if ($errors->has('sapta_wara'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('sapta_wara') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col">
+                            <select class="form-select @error('panca_wara') is-invalid @enderror" id="panca_wara" name="panca_wara" aria-label="Default select example" value="{{ old('panca_wara') }}">
+                                <option value="">Pilih Panca Wara</option>
+                                <option value="Umanis">Umanis</option>
+                                <option value="Paing">Paing</option>
+                                <option value="Pon">Pon</option>
+                                <option value="Wage">Wage</option>
+                                <option value="Kliwon">Kliwon</option>
+                            </select>
+                            @if ($errors->has('panca_wara'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('panca_wara') }}
                                 </div>
                             @endif
                         </div>
@@ -213,13 +225,14 @@
 
         function checkradiobox(){
             var radio = $("input[name='jenis_piodalan']:checked").val();
-            $('#wuku,#sasih,#sapta_wara,#panca_wara').attr('disabled',true);
+            $('#wuku,#sasih,#sapta_wara,#panca_wara,#bulan').attr('disabled',true);
             if(radio == "wuku"){
                 $('#wuku').attr('disabled',false);
                 $('#sapta_wara').attr('disabled',false);
                 $('#panca_wara').attr('disabled',false);
             }else if(radio == 'sasih'){
                 $('#sasih').attr('disabled',false);
+                $('#bulan').attr('disabled',false);
             }
         }
         $("#inlineRadio1, #inlineRadio2").change(function() {

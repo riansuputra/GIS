@@ -34,7 +34,7 @@
                             @if(!($pura->sasih))
                                 <td>{{$pura->sapta_wara}} {{$pura->panca_wara}} {{$pura->wuku}}</td>
                             @else
-                                <td>Sasih {{$pura->sasih}}</td>
+                                <td>{{$pura->bulan}} Sasih {{$pura->sasih}}</td>
                             @endif
                             <td>{{$pura->alamat}}</td>
                             <td style="width:10%; text-align: center">

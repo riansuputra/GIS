@@ -83,6 +83,7 @@ class PengurusController extends Controller
         // $pelinggihs = Pelinggih::all();
         $penguruses = DB::table('penguruses')
             ->where('pura_id', '=', $id)->get();
+        // dd($puraid);
         // $selected = DB::table('pelinggihs')
         //     ->where('id', '=', $id)->get();
         return view('pages.pengurus.listPengurus', compact('puras','penguruses','puraid'));

@@ -53,6 +53,7 @@ class PuraController extends Controller
             'panca_wara' => 'nullable',
             'wuku' => 'nullable',
             'sasih' => 'nullable',
+            'bulan' => 'nullable',
             'alamat' => 'required|string',
             'lat' => 'required',
             'lng' => 'required'
@@ -143,6 +144,7 @@ class PuraController extends Controller
             'panca_wara' => 'nullable',
             'wuku' => 'nullable|required_without:sasih',
             'sasih' => 'nullable|required_without:wuku',
+            'bulan' => 'nullable|required_without:wuku',
             'alamat' => 'required|string',
             'lat' => 'required',
             'lng' => 'required'
@@ -152,7 +154,7 @@ class PuraController extends Controller
         if($request->jenis_piodalan == 'wuku'){
             $oldSasih = Pura::where('id', '=', $id, 'and')
                             ->where('jenis_piodalan','=','sasih')
-                            ->update(['sasih' => null]);
+                            ->update(['sasih' => null, 'bulan' => null]);
         } else {
             $oldWuku = Pura::where('id', '=', $id, 'and')
                             ->where('jenis_piodalan', '=', 'Wuku')
@@ -168,6 +170,7 @@ class PuraController extends Controller
             'panca_wara' => $request->panca_wara,
             'wuku' => $request->wuku,
             'sasih' => $request->sasih,
+            'bulan' => $request->bulan,
             'alamat' => $request->alamat,
             'lat' => $request->lat,
             'lng' => $request->lng
