@@ -104,6 +104,7 @@
                 let puras = <?php echo json_encode($puras); ?>;
                 let fotos = <?php echo json_encode($fotos); ?>;
             </script>
+            <script src="{{url('js/leaflet-routing-machine.js')}}"></script>         
             <script type="text/javascript" src="{{url('js/leaflet.js')}}"></script>         
         </div>
     </div>

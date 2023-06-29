@@ -1,8 +1,13 @@
 var map = L.map('map').setView([-8.309882117649769, 114.56416986814997], 11);
+var routingControl;
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
     maxZoom: 18,
+}).addTo(map);
+
+routingControl = L.Routing.control({
+    routeWhileDragging: true
 }).addTo(map);
 
 var markers = [];
@@ -10,6 +15,12 @@ var markers = [];
 var markerClusters = L.markerClusterGroup().addTo(map); 
 
 var isOnDrag = false;
+var firstWaypoint = null;
+var secondWaypoint = null;
+// L.Routing.control({
+    
+//     routeWhileDragging: true
+// }).addTo(map);
 
 const puraIcon = L.Icon.extend({
     options: {
@@ -104,9 +115,45 @@ puras.forEach(function (pura, index) {
 map.on('click', function(e) {
     
     // document.getElementById("buttonAddModal").click();
-    document.getElementById("lat").value = e.latlng.lat;
-    document.getElementById("lng").value = e.latlng.lng;
-    markers = new L.Marker(e.latlng, { icon: myIcon }).addTo(map);
+    var popupContent;
+    if (firstWaypoint === null) {
+        popupContent = `
+            <h5 class="text-center">Set First Waypoint</h5>
+            <p>Do you want to set this location as the first waypoint?</p>
+            <div class="text-center">
+                <button id="confirmBtn" class="btn btn-sm btn-primary">Confirm</button>
+            </div>
+        `;
+    } else {
+        popupContent = `
+            <h5 class="text-center">Change First Waypoint</h5>
+            <p>Do you want to change the first waypoint to this location?</p>
+            <div class="text-center">
+                <button id="confirmBtn" class="btn btn-sm btn-primary">Confirm</button>
+            </div>
+        `;
+    }
+
+    var popup = L.popup()
+        .setLatLng(e.latlng)
+        .setContent(popupContent)
+        .openOn(map);
+
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+        var waypoints = routingControl.getWaypoints();
+
+        if (firstWaypoint === null) {
+            // Set the first waypoint as the clicked location
+            firstWaypoint = e.latlng;
+        } else {
+            // Change the first waypoint to the clicked location
+            firstWaypoint = e.latlng;
+            waypoints[0] = L.Routing.waypoint(firstWaypoint);
+        }
+
+        routingControl.setWaypoints(waypoints);
+        map.closePopup(popup);
+    });
         // Buat marker baru
         // var newMarker = addMarker(e.latlng,markers.length);
         // console.log(document.getElementById('email').value);
@@ -143,6 +190,32 @@ map.on('click', function(e) {
 // markers.forEach(function (marker, index){
     markers.forEach(function (marker, index) {
         marker.on('click', function(e) {
+            var waypoints = routingControl.getWaypoints();
+        var markerLatLng = marker.getLatLng();
+
+        if (firstWaypoint === null) {
+            // Set the first waypoint as the clicked marker
+            firstWaypoint = markerLatLng;
+            routingControl.setWaypoints([
+                L.Routing.waypoint(firstWaypoint),
+                waypoints[1]
+            ]);
+        } else if (secondWaypoint === null) {
+            // Set the second waypoint as the clicked marker
+            secondWaypoint = markerLatLng;
+            routingControl.setWaypoints([
+                waypoints[0],
+                L.Routing.waypoint(secondWaypoint)
+            ]);
+        } else {
+            // Reset the waypoints and set the clicked marker as the new destination
+            routingControl.setWaypoints([
+                waypoints[0],
+                L.Routing.waypoint(markerLatLng)
+            ]);
+        }
+            
+            // routingControl.spliceWaypoints(routingControl.getWaypoints().length - 1, 1, e.latlng);
             // alert(fotos);
 
 

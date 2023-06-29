@@ -48,6 +48,8 @@
     <link rel="stylesheet" href="{{url('/css/MarkerCluster.css')}}" />
     <link rel="stylesheet" href="{{url('/css/MarkerCluster.Default.css')}}" /> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{url('/css/leaflet-routing-machine.css')}}" />
+
 
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
     

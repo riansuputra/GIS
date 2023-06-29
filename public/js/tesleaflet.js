@@ -1,163 +1,340 @@
-// Menampilkan peta
-var mymap = L.map('map').setView([-8.4095188,115.188919], 11);
+var map = L.map('map').setView([-8.309882117649769, 114.56416986814997], 11);
+var routingControl;
 
-// Menambahkan layer peta
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
     maxZoom: 18,
-}).addTo(mymap);
+}).addTo(map);
 
-// Array markers
+routingControl = L.Routing.control({
+    routeWhileDragging: true
+}).addTo(map);
+
 var markers = [];
 
-// Marker cluster
-var markerClusters = L.markerClusterGroup().addTo(mymap);        
+var markerClusters = L.markerClusterGroup().addTo(map); 
 
-// Is On Drag
 var isOnDrag = false;
-
-// Membuat icon dari gambar PNG
-var myIcon = L.icon({
-    iconUrl: 'icon.png',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-});
-
-// Format popup content
-formatContent = function(lat, lng, index){
-    return `
-            <div class="row">
-                <div class="cell merged" style="text-align:center">Marker [ ${index+1} ]</div>
-            </div>
-            <div class="row">
-                <div class="col">Latitude</div>
-                <div class="col">${lat}</div>
-            </div>
-            <div class="row">
-                <div class="col">Longitude</div>
-                <div class="col">${lng}</div>
-            </div>
-            <div class="row">
-                <div class="col">Left click</div>
-                <div class="col">New marker / show popup</div>
-            </div>
-            <div class="row">
-                <div class="col">Right click</div>
-                <div class="col">Delete marker</div>
-            </div>
-    `;
-}
-
-addMarker =  function(latlng,index){
-
-    // Menambahkan marker
-    var marker = L.marker(latlng,{
-        icon: myIcon,
-        draggable: true
-    });
-
-    // Membuat popup baru
-    var popup = L.popup({ offset: [0, -30]})
-        .setLatLng(latlng);
+var firstWaypoint = null;
+var secondWaypoint = null;
+// L.Routing.control({
     
-    // Binding popup ke marker
-    marker.bindPopup(popup);
+//     routeWhileDragging: true
+// }).addTo(map);
 
-    // Menambahkan event listener pada marker
-    marker.on('click', function() {
-        popup.setLatLng(marker.getLatLng()),
-        popup.setContent(formatContent(marker.getLatLng().lat,marker.getLatLng().lng,index));
-    });
-
-    marker.on('dragstart', function(event) {
-        isOnDrag = true;
-    });
-
-    // Menambahkan event listener pada marker
-    marker.on('drag', function(event) {
-        popup.setLatLng(marker.getLatLng()),
-        popup.setContent(formatContent(marker.getLatLng().lat,marker.getLatLng().lng,index));
-        marker.openPopup();
-    });
-
-    marker.on('dragend', function(event) {
-        setTimeout(function() {
-            isOnDrag = false;
-        }, 500);
-    });
-
-    marker.on('contextmenu', function(event) {
-        // Hapus semua marker dari array markers
-        markers.forEach(function (m,i) {
-            if(marker == m){
-                m.removeFrom(mymap); // hapus marker dari peta
-                markers.splice(i, 1);
-            }
-        });
-        //console.log(markers);
-    });
-
-    // Return marker
-    return marker;
-}
-
-// Tambahkan event listener click pada peta
-mymap.on('click', function(e) {
-    console.log(isOnDrag);
-    if(!isOnDrag){
-        // Buat marker baru
-        var newMarker = addMarker(e.latlng,markers.length);
-        
-        // Tambahkan marker ke array markers
-        markers.push(newMarker);
-
-        // Tambahkan ke markercluster
-        markerClusters.addLayer(L.layerGroup(markers));
+const puraIcon = L.Icon.extend({
+    options: {
+        iconSize:     [40, 40],
+        iconAnchor:   [20, 40],
     }
 });
 
-var btnKirim = document.getElementById('btnKirim');
-btnKirim.addEventListener('click',function(){
-    // Ambil koordinat masing-masing marker dan simpan ke dalam array koordinat
-    var koordinat = markers.map(function(marker) {
-        return [marker.getLatLng().lat, marker.getLatLng().lng];
-    });
+function getColor(d) {
+    return d === 'Swagina' ? "btn-warning" :
+    d === 'Kawitan'  ? "btn-danger" :
+    d === 'Kahyangan Tiga'  ? "btn-primary" :
+    d === 'Kahyangan Jagat' ? "btn-dark" :
+                        "#ff7f00";
+}
 
-    // Kirim data ke server dalam format JSON menggunakan method fetch()
-    fetch("simpan.php", {
-        method: "POST",
-        body: JSON.stringify(koordinat),
-        headers: {
-            "Content-Type": "application/json"
+function style(feature) {
+    return {
+        weight: 1.5,
+        opacity: 1,
+        fillOpacity: 1,
+        radius: 6,
+        fillColor: getColor(feature.properties.TypeOfIssue),
+        color: "grey"
+
+    };
+}
+
+var legend = L.control({position: 'bottomleft'});
+    legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend mx-3 my-3');
+    labels = ['<strong>Jenis Pura</strong>'],
+    categories = ['Swagina','Kawitan','Kahyangan Tiga','Kahyangan Jagat'];
+
+    for (var i = 0; i < categories.length; i++) {
+
+            div.innerHTML += 
+            labels.push(
+                '<button type="button" class="btn ' + getColor(categories[i]) + ' rounded-pill"></button> ' +
+            (categories[i] ? categories[i] : '+'));
+
         }
-    }).then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data);
-    })
-    .catch(function(error) {
-        console.log(error);
-    });
+        div.innerHTML = labels.join('<br>');
+    return div;
+    };
+    legend.addTo(map);
+
+const swaginaIcon = new puraIcon({iconUrl: '/foto/swaginaIcon.png'});
+const kawitanIcon = new puraIcon({iconUrl: '/foto/kawitanIcon.png'});
+const tigaIcon = new puraIcon({iconUrl: '/foto/tigaIcon.png'});
+const jagatIcon = new puraIcon({iconUrl: '/foto/jagatIcon.png'});
+
+puras.forEach(function (pura, index) {
+    if(pura.jenis == "Kawitan") {
+
+        markers.push(
+            new L.Marker([pura.lat, pura.lng], {
+                icon: kawitanIcon,
+                draggable: false,
+            })
+        );
+    } else if(pura.jenis == "Swagina") {
+
+        markers.push(
+            new L.Marker([pura.lat, pura.lng], {
+                icon: swaginaIcon,
+                draggable: false,
+            })
+        );
+    } else if(pura.jenis == "Kahyangan Tiga") {
+
+        markers.push(
+            new L.Marker([pura.lat, pura.lng], {
+                icon: tigaIcon,
+                draggable: false,
+            })
+        );
+    } else if(pura.jenis == "Kahyangan Jagat") {
+
+        markers.push(
+            new L.Marker([pura.lat, pura.lng], {
+                icon: jagatIcon,
+                draggable: false,
+            })
+        );
+    }
+    markerClusters.addLayer(L.layerGroup(markers));
+
 });
 
-// Ambil data dari server dalam format JSON menggunakan method fetch()
-fetch("baca.php").then(function(response) {
-        // return response.text();
-        return response.json();
-    })
-    .then(function(data) {
-        var latlangs = [];
-        data.forEach(function(c,i){
-            let latlng = L.latLng(c[0], c[1]);
-            latlangs.push(latlng);
-            var newMarker = addMarker(latlng,markers.length);
-            markers.push(newMarker);
-        })
+map.on('click', function(e) {
+    
+    // document.getElementById("buttonAddModal").click();
+    var popupContent;
+    if (firstWaypoint === null) {
+        popupContent = `
+            <h5 class="text-center">Set First Waypoint</h5>
+            <p>Do you want to set this location as the first waypoint?</p>
+            <div class="text-center">
+                <button id="confirmBtn" class="btn btn-sm btn-primary">Confirm</button>
+            </div>
+        `;
+    } else {
+        popupContent = `
+            <h5 class="text-center">Change First Waypoint</h5>
+            <p>Do you want to change the first waypoint to this location?</p>
+            <div class="text-center">
+                <button id="confirmBtn" class="btn btn-sm btn-primary">Confirm</button>
+            </div>
+        `;
+    }
 
-        // Tambahkan ke markercluster
-        markerClusters.addLayer(L.layerGroup(markers));
-    })
-    .catch(function(error) {
-        console.log(error);
+    var popup = L.popup()
+        .setLatLng(e.latlng)
+        .setContent(popupContent)
+        .openOn(map);
+
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+        var waypoints = routingControl.getWaypoints();
+
+        if (firstWaypoint === null) {
+            // Set the first waypoint as the clicked location
+            firstWaypoint = e.latlng;
+        } else {
+            // Change the first waypoint to the clicked location
+            firstWaypoint = e.latlng;
+            waypoints[0] = L.Routing.waypoint(firstWaypoint);
+        }
+
+        routingControl.setWaypoints(waypoints);
+        map.closePopup(popup);
     });
+        // Buat marker baru
+        // var newMarker = addMarker(e.latlng,markers.length);
+        // console.log(document.getElementById('email').value);
+        
+        // Tambahkan marker ke array markers
+        // markers.push(newMarker);
+
+        
+
+    
+});
+
+
+// addMarker =  function(latlng,index){
+
+//     // Menambahkan marker
+//     var marker = L.marker(latlng,{
+//         icon: myIcon,
+//         draggable: true
+//     }).addTo(map);
+
+//     // Membuat popup baru
+//     var popup = L.popup({ offset: [0, -30]})
+//         .setLatLng(latlng);
+    
+// var popup = L.popup()
+//     .setContent("I am a standalone popup.");
+
+// marker.bindPopup(popup).openPopup();
+
+// //     // Binding popup ke marker
+//     marker.bindPopup(popup);
+    // Menambahkan event listener pada marker
+// markers.forEach(function (marker, index){
+    markers.forEach(function (marker, index) {
+        marker.on('click', function(e) {
+            var waypoints = routingControl.getWaypoints();
+        var markerLatLng = marker.getLatLng();
+
+        if (firstWaypoint === null) {
+            // Set the first waypoint as the clicked marker
+            firstWaypoint = markerLatLng;
+            routingControl.setWaypoints([
+                L.Routing.waypoint(firstWaypoint),
+                waypoints[1]
+            ]);
+        } else if (secondWaypoint === null) {
+            // Set the second waypoint as the clicked marker
+            secondWaypoint = markerLatLng;
+            routingControl.setWaypoints([
+                waypoints[0],
+                L.Routing.waypoint(secondWaypoint)
+            ]);
+        } else {
+            // Reset the waypoints and set the clicked marker as the new destination
+            routingControl.setWaypoints([
+                waypoints[0],
+                L.Routing.waypoint(markerLatLng)
+            ]);
+        }
+            
+            // routingControl.spliceWaypoints(routingControl.getWaypoints().length - 1, 1, e.latlng);
+            // alert(fotos);
+
+
+            // var popup = L.popup()
+            //     .setContent("I am a standalone popup.");
+
+            // marker.bindPopup(popup).openPopup();
+            // document.getElementById(`buttonPura_${puras[index].id}`).click();
+            // document.getElementById(`buttonPura_${puras[index].id}`).action = `https://localhost:8000/${puras[index].id}/detailpura`;;
+            // console.log(`${puras[index].id}`);
+            // window.open(`http://localhost:8000/${puras[index].id}/detailpura`,'_self');
+            var popup = L.popup(e.latlng, {
+                content: `
+                    <h5 class="text-center">${puras[index].nama}</h5>
+                    <br>
+                    <div class="row text-center">
+                        <div class="col-12 text-center">
+                           <img src="foto/pura/${puras[index].foto}" alt="..." style="width:280px;height:260px">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <a href="http://localhost:8000/${puras[index].id}/detailpura" data-mdb-ripple-duration=0 type="button" class="btn btn-sm btn-primary active" style="width:100%">Details</a>
+                        </div>
+                        
+                    </div>
+                `
+            }).openOn(map);
+            // popup.setLatLng(marker.getLatLng()),
+            // popup.setContent(formatContent(marker.getLatLng().lat,marker.getLatLng().lng,index));
+            // marker.bindPopup(popup).openPopup();
+
+        });
+
+        
+
+    
+    });
+    // marker.on('dragstart', function(event) {
+    //     isOnDrag = true;
+    // });
+
+    // // Menambahkan event listener pada marker
+    // marker.on('drag', function(event) {
+    //     popup.setLatLng(marker.getLatLng()),
+    //     popup.setContent(formatContent(marker.getLatLng().lat,marker.getLatLng().lng,index));
+    //     marker.openPopup();
+    // });
+
+    // marker.on('dragend', function(event) {
+    //     setTimeout(function() {
+    //         isOnDrag = false;
+    //     }, 500);
+    // });
+
+    
+
+    // Return marker
+//     return marker;
+// };
+
+const editModal = (index) => {
+    document.getElementById("buttonEditModal").click();
+    document.getElementById("formEdit").action = `https://localhost:8000/${puras[index].id}/edit`;
+    document.getElementById("nama_edit").value = puras[index].nama;
+    document.getElementById("status_edit").value = puras[index].status;
+    document.getElementById("piodalan_edit").value = puras[index].piodalan;
+    document.getElementById("pemangku_edit").value = puras[index].pemangku;
+    document.getElementById("alamat_edit").value = puras[index].alamat;
+    document.getElementById("telepon_edit").value = puras[index].telepon;
+    document.getElementById("lat_edit").value = puras[index].lat;
+    document.getElementById("lng_edit").value = puras[index].lng;
+};
+
+
+// var btnKirim = document.getElementById('btnKirim');
+// btnKirim.addEventListener('click',function(){
+//     // Ambil koordinat masing-masing marker dan simpan ke dalam array koordinat
+//     var koordinat = markers.map(function(marker) {
+//         return [marker.getLatLng().lat, marker.getLatLng().lng];
+//     });
+
+//     // Kirim data ke server dalam format JSON menggunakan method fetch()
+//     fetch("simpan.php", {
+//         method: "POST",
+//         body: JSON.stringify(koordinat),
+//         headers: {
+//             "Content-Type": "application/json"
+//         }
+//     }).then(function(response) {
+//         return response.json();
+//     })
+//     .then(function(data) {
+//         console.log(data);
+//     })
+//     .catch(function(error) {
+//         console.log(error);
+//     });
+// });
+
+// // Ambil data dari server dalam format JSON menggunakan method fetch()
+// fetch("baca.php").then(function(response) {
+//         // return response.text();
+//         return response.json();
+//     })
+//     .then(function(data) {
+//         // console.log(data);
+//         // const originalData = ArchUtils.bz2.decode(data);
+//         // console.log(originalData);
+//         //console.log(JSON.stringify(data).length);
+
+//         data.forEach(function(c,i){
+//             let latlng = L.latLng(c[0], c[1]);
+//             var newMarker = addMarker(latlng,markers.length);
+//             markers.push(newMarker);
+//         })
+//     })
+//     .catch(function(error) {
+//         console.log(error);
+//     });
+
