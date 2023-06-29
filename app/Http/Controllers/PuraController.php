@@ -23,9 +23,13 @@ class PuraController extends Controller
      */
     public function index()
     {
-        $puras = Pura::all();
+        // $puras = Pura::all();
+        // $fotos = DB::table('fotos')->where('type', '=', 'Pura')->get();
+        $puras = Pura::leftJoin('fotos', 'puras.id', '=', 'fotos.pura_id')
+            ->select('puras.*', 'fotos.foto')
+            ->get();
         $fotos = Foto::all();
-        // dd($fotos);
+        // dd($puras);
         $penguruses = Pengurus::all();
         $pelinggihs = Pelinggih::all();
         return view('pages.map', compact('puras','fotos','pelinggihs','penguruses'));;

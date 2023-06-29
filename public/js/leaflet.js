@@ -104,7 +104,6 @@ puras.forEach(function (pura, index) {
 map.on('click', function(e) {
     
     // document.getElementById("buttonAddModal").click();
-    // alert(puras);
     document.getElementById("lat").value = e.latlng.lat;
     document.getElementById("lng").value = e.latlng.lng;
     markers = new L.Marker(e.latlng, { icon: myIcon }).addTo(map);
@@ -133,37 +132,50 @@ map.on('click', function(e) {
 //     var popup = L.popup({ offset: [0, -30]})
 //         .setLatLng(latlng);
     
+// var popup = L.popup()
+//     .setContent("I am a standalone popup.");
+
+// marker.bindPopup(popup).openPopup();
+
 // //     // Binding popup ke marker
 //     marker.bindPopup(popup);
     // Menambahkan event listener pada marker
 // markers.forEach(function (marker, index){
     markers.forEach(function (marker, index) {
         marker.on('click', function(e) {
+            // alert(fotos);
+
+
+            // var popup = L.popup()
+            //     .setContent("I am a standalone popup.");
+
+            // marker.bindPopup(popup).openPopup();
             // document.getElementById(`buttonPura_${puras[index].id}`).click();
             // document.getElementById(`buttonPura_${puras[index].id}`).action = `https://localhost:8000/${puras[index].id}/detailpura`;;
             // console.log(`${puras[index].id}`);
-            window.open(`http://localhost:8000/${puras[index].id}/detailpura`,'_self');
-            // var popup = L.popup(e.latlng, {
-            //     content: `
-            //     <h5>${puras[index].nama}</h5>
-            //         <div class="row">
-            //             <img src="{{url('foto/pura/'.$fotos->filename)}}" class="d-block w-100">
-            //         <div class="row">
-            //             <div class="col-4">Longitude</div>
-            //             <div class="col-1">:</div>
-            //             <div class="col-6">${puras[index].lng}</div>
-            //         </div>
-            //         <br>
-            //         <div class="row">
-            //             <div class="col-12 text-center">
-            //                 <a data-mdb-ripple-duration=0 type="button" class="btn btn-sm btn-primary active" style="width:100%" onclick="editModal(${index})">Details</a>
-            //             </div>
+            // window.open(`http://localhost:8000/${puras[index].id}/detailpura`,'_self');
+            var popup = L.popup(e.latlng, {
+                content: `
+                    <h5 class="text-center">${puras[index].nama}</h5>
+                    <br>
+                    <div class="row text-center">
+                        <div class="col-12 text-center">
+                           <img src="foto/pura/${puras[index].foto}" alt="..." style="width:280px;height:260px">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <a href="http://localhost:8000/${puras[index].id}/detailpura" data-mdb-ripple-duration=0 type="button" class="btn btn-sm btn-primary active" style="width:100%">Details</a>
+                        </div>
                         
-            //         </div>
-            //     `
-            // }).openOn(map);
+                    </div>
+                `
+            }).openOn(map);
             // popup.setLatLng(marker.getLatLng()),
             // popup.setContent(formatContent(marker.getLatLng().lat,marker.getLatLng().lng,index));
+            // marker.bindPopup(popup).openPopup();
+
         });
 
         
