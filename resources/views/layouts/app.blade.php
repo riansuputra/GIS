@@ -223,7 +223,7 @@
                         @yield('breadcrumb')
                     </ol>
                 </nav>
-                <a data-mdb-ripple-duration=0 href="javascript:history.back()" class="btn btn-primary">Back</a>
+                @yield('back')
             </div>
         </header>
         

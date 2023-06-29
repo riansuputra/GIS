@@ -6,6 +6,13 @@
 <li class="breadcrumb-item active">Daftar Pengurus</li>
 @endsection
 
+@section('back')
+<a data-mdb-ripple-duration=0 href="{{ url()->previous() }}" class="btn btn-primary">
+    <svg class="icon">
+        <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-arrow-circle-left')}}"></use>
+    </svg>  Back</a>
+@endsection
+
 @section('content')
 <div class="row">
     <div class="card mb-4">
