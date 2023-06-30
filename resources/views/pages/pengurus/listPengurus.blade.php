@@ -7,7 +7,7 @@
 @endsection
 
 @section('back')
-<a data-mdb-ripple-duration=0 href="{{ url()->previous() }}" class="btn btn-primary">
+<a data-mdb-ripple-duration=0 href="{{ route('index') }}" class="btn btn-primary">
     <svg class="icon">
         <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-arrow-circle-left')}}"></use>
     </svg>  Back</a>
@@ -23,7 +23,7 @@
         <div class="card-body row">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                        <a href="/{{$pura_id->id}}/detailpura">
+                        <a href="{{ route('detailpura', ['id' => $pura_id->id]) }}">
                             <button class="nav-link" data-coreui-toggle="tab" role="tab">
                                 <svg class="icon me-2">
                                     <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-bank')}}"></use>
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/{{$pura_id->id}}/daftarpelinggih">
+                        <a href="{{ route('daftarlistpelinggih', ['id' => $pura_id->id]) }}">
                             <button class="nav-link" data-coreui-toggle="tab" role="tab">
                                 <svg class="icon me-2">
                                     <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-building')}}"></use>
@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/{{$pura_id->id}}/daftarpengurus">
+                        <a href="{{ route('daftarlistpengurus', ['id' => $pura_id->id]) }}">
                             <button class="nav-link active" data-coreui-toggle="tab" role="tab">
                                 <svg class="icon me-2">
                                     <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
@@ -88,17 +88,17 @@
                             </td>
                             <td style="width:10%; text-align: center">
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                    <a data-mdb-ripple-duration=0 class="btn btn-success" href="/{{$pengurus->id}}/detailpengurus">
+                                    <a data-mdb-ripple-duration=0 class="btn btn-success" href="{{ route('detailpengurus', ['id' => $pengurus->id]) }}">
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-magnifying-glass')}}"></use>
                                         </svg>
                                     </a>
-                                    <a data-mdb-ripple-duration=0 class="btn btn-info" href="/{{$pengurus->pura_id}}/{{$pengurus->id}}/editpengurus">
+                                    <a data-mdb-ripple-duration=0 class="btn btn-info" href="{{ route('editpengurus', ['puraid' => $pengurus->pura_id, 'id' => $pengurus->id]) }}">
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-pencil')}}"></use>
                                         </svg>
                                     </a>
-                                    <a data-mdb-ripple-duration=0 href="/{{$pengurus->pura_id}}/{{$pengurus->id}}/deletepengurus" class="btn btn-danger" >
+                                    <a data-mdb-ripple-duration=0 href="{{ route('deletepengurus', ['puraid' => $pengurus->pura_id, 'id' => $pengurus->id]) }}" class="btn btn-danger" >
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-trash')}}"></use>
                                         </svg>

@@ -8,7 +8,7 @@
 @endsection
 
 @section('back')
-<a data-mdb-ripple-duration=0 href="{{ url()->previous() }}" class="btn btn-primary">
+<a data-mdb-ripple-duration=0 href="{{ route('daftarpura') }}" class="btn btn-primary">
     <svg class="icon">
         <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-arrow-circle-left')}}"></use>
     </svg>  Back</a>
@@ -20,7 +20,7 @@
         <div class="card-header"><strong>Edit Data Pelinggih</strong></div>
         <div class="card-body">
             <div class="tab-content rounded-bottom">
-                <form method="POST" action="/{{$pelinggih->pura_id}}/{{$pelinggih->id}}/updatepelinggih" id="formCreate" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('updatepelinggih', ['puraid' => $pelinggih->pura_id, 'id' => $pelinggih->id]) }}" id="formCreate" enctype="multipart/form-data">
                     @csrf
                 <div class="mb-3">
                     <label class="form-label" for="nama">Nama Pelinggih :</label>

@@ -8,7 +8,7 @@
 @endsection
 
 @section('back')
-<a data-mdb-ripple-duration=0 href="{{ url()->previous() }}" class="btn btn-primary">
+<a data-mdb-ripple-duration=0 href="{{ route('index') }}" class="btn btn-primary">
     <svg class="icon">
         <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-arrow-circle-left')}}"></use>
     </svg>  Back</a>
@@ -22,7 +22,7 @@
         </div>
         <div class="card-body">
             <div class="tab-content rounded-bottom">
-                <form method="POST" action="/{{$pengurus->pura_id}}/{{$pengurus->id}}/updatepengurus" id="formCreate" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('updatepengurus', ['pura_id' => $pengurus->pura_id, 'id' => $pengurus->id]) }}" id="formCreate" enctype="multipart/form-data">
                     @csrf
                 <div class="col mb-3">
                     <label class="form-label" for="sebagai">Sebagai :</label>

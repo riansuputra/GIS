@@ -121,7 +121,7 @@ map.on('click', function(e) {
             <h5 class="text-center">Set First Waypoint</h5>
             <p>Do you want to set this location as the first waypoint?</p>
             <div class="text-center">
-                <button id="confirmBtn" class="btn btn-sm btn-primary">Confirm</button>
+                <button data-mdb-ripple-duration=0 id="confirmBtn" class="btn btn-sm btn-primary">Confirm</button>
             </div>
         `;
     } else {
@@ -129,7 +129,7 @@ map.on('click', function(e) {
             <h5 class="text-center">Change First Waypoint</h5>
             <p>Do you want to change the first waypoint to this location?</p>
             <div class="text-center">
-                <button id="confirmBtn" class="btn btn-sm btn-primary">Confirm</button>
+                <button data-mdb-ripple-duration=0 id="confirmBtn" class="btn btn-sm btn-primary">Confirm</button>
             </div>
         `;
     }
@@ -239,7 +239,7 @@ map.on('click', function(e) {
                     <br>
                     <div class="row">
                         <div class="col-12 text-center">
-                            <a href="http://localhost:8000/${puras[index].id}/detailpura" data-mdb-ripple-duration=0 type="button" class="btn btn-sm btn-primary active" style="width:100%">Details</a>
+                            <a href="http://localhost:8000/${puras[index].id}/detailpura" data-mdb-ripple-duration=0 type="button" class="btn btn-sm btn-primary active" style="width:100%">Detail Pura</a>
                         </div>
                         
                     </div>

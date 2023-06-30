@@ -3,7 +3,7 @@
 @section('title', 'Tambah Pelinggih')
 
 @section('back')
-<a data-mdb-ripple-duration=0 href="{{ url()->previous() }}" class="btn btn-primary">
+<a data-mdb-ripple-duration=0 href="{{ route('index') }}" class="btn btn-primary">
     <svg class="icon">
         <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-arrow-circle-left')}}"></use>
     </svg>  Back</a>
@@ -24,6 +24,7 @@
                 <div class="mb-3">
                     <label class="form-label" for="pura_id">Pilih Pura :</label>
                     <select class="form-select @error('pura_id') is-invalid @enderror" id="pura_id" name="pura_id" aria-label="Default select example">
+                        <option value="">Pilih Pura</option>
                         @foreach($puras as $pura)
                             <option value="{{$pura->id}}">{{$pura->nama}}</option>
                         @endforeach

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Pura')
+@section('title', 'Detail Pura')
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
@@ -10,7 +10,7 @@
 @endsection
 
 @section('back')
-<a data-mdb-ripple-duration=0 href="{{ url()->previous() }}" class="btn btn-primary">
+<a data-mdb-ripple-duration=0 href="{{ route('index')}}" class="btn btn-primary">
     <svg class="icon">
         <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-arrow-circle-left')}}"></use>
     </svg>  Back</a>
@@ -25,7 +25,7 @@
         <div class="card-body row">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a href="/{{$puras->id}}/detailpura">
+                    <a href="{{ route('detailpura', ['id' => $puras->id]) }}">
                         <button class="nav-link active" data-coreui-toggle="tab" role="tab">
                             <svg class="icon me-2">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-bank')}}"></use>
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/{{$puras->id}}/daftarpelinggih">
+                    <a href="{{ route('daftarlistpelinggih', ['id' => $puras->id]) }}">
                         <button class="nav-link" data-coreui-toggle="tab" role="tab">
                             <svg class="icon me-2">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-building')}}"></use>
@@ -43,7 +43,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/{{$puras->id}}/daftarpengurus">
+                    <a href="{{ route('daftarlistpengurus', ['id' => $puras->id]) }}">
                         <button class="nav-link" data-coreui-toggle="tab" role="tab">
                             <svg class="icon me-2">
                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-user')}}"></use>
@@ -100,14 +100,14 @@
                             @else
                                 <div class="row">
                                     <div class="col-2" style="width:22%">
-                                        <a data-mdb-ripple-duration=0 href="/{{$puras->id}}/editpura" type="button" class="btn btn-outline-primary" style="display: inline-flex; align-items: flex-end; ">
+                                        <a data-mdb-ripple-duration=0 href="{{ route('editpura', ['id' => $puras->id]) }}" type="button" class="btn btn-primary" style="display: inline-flex; align-items: flex-end; ">
                                             <svg class="icon me-2" style="width: 25; height: 25;">
                                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-pencil')}}"></use>
                                             </svg> Edit Pura
                                         </a>
                                     </div>
                                     <div class="col-2" style="width:22%">
-                                        <a data-mdb-ripple-duration=0 data-coreui-toggle="modal" data-coreui-target="#staticBackdropLive" type="button" class="btn btn-outline-danger" style="display: inline-flex; align-items: flex-end;">
+                                        <a data-mdb-ripple-duration=0 data-coreui-toggle="modal" data-coreui-target="#staticBackdropLive" type="button" class="btn btn-danger text-light" style="display: inline-flex; align-items: flex-end;">
                                             <svg class="icon me-2" style="width: 25; height: 25;">
                                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-trash')}}"></use>
                                             </svg>

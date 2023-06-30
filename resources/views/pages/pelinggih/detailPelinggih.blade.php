@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Pura')
+@section('title', 'Detail Pelinggih')
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{ route('daftarpura')}}">Daftar Pura</a></li>
+<li class="breadcrumb-item"><a href="{{ route('daftarpelinggih')}}">Daftar Pelinggih</a></li>
 <li class="breadcrumb-item active">{{$pelinggihs->nama}}</li>
 @endsection
 
 @section('back')
-<a data-mdb-ripple-duration=0 href="{{ url()->previous() }}" class="btn btn-primary">
+<a data-mdb-ripple-duration=0 href="{{ route('daftarpura') }}" class="btn btn-primary">
     <svg class="icon">
         <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-arrow-circle-left')}}"></use>
     </svg>  Back</a>

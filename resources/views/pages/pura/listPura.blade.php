@@ -46,27 +46,27 @@
                             <td>{{$pura->alamat}}</td>
                             <td style="width:10%; text-align: center">
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                    <a data-mdb-ripple-duration=0 class="btn btn-secondary" href="/{{$pura->id}}/detailpura" title="Detail Pura">
+                                    <a data-mdb-ripple-duration=0 class="btn btn-secondary" href="{{ route('detailpura', ['id' => $pura->id]) }}" title="Detail Pura">
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-library-building')}}"></use>
                                         </svg>
                                     </a>
-                                    <a data-mdb-ripple-duration=0 class="btn btn-success" href="/{{$pura->id}}/daftarpelinggih" title="Daftar Pelinggih">
+                                    <a data-mdb-ripple-duration=0 class="btn btn-success" href="{{ route('daftarlistpelinggih', ['id' => $pura->id]) }}" title="Daftar Pelinggih">
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-building')}}"></use>
                                         </svg>
                                     </a>
-                                    <a data-mdb-ripple-duration=0 class="btn btn-warning" href="/{{$pura->id}}/daftarpengurus" title="Daftar Pengurus">
+                                    <a data-mdb-ripple-duration=0 class="btn btn-warning" href="{{ route('daftarlistpengurus', ['id' => $pura->id]) }}" title="Daftar Pengurus">
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-people')}}"></use>
                                         </svg>
                                     </a>
-                                    <a data-mdb-ripple-duration=0 class="btn btn-info" href="/{{$pura->id}}/editpura" title="Edit Pura">
+                                    <a data-mdb-ripple-duration=0 class="btn btn-info" href="{{ route('editpura', ['id' => $pura->id]) }}" title="Edit Pura">
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-pencil')}}"></use>
                                         </svg>
                                     </a>
-                                    <a data-mdb-ripple-duration=0 class="btn btn-danger" href="/{{$pura->id}}/deletepura" title="Hapus Pura">
+                                    <a data-mdb-ripple-duration=0 class="btn btn-danger" href="{{ route('deletepura', ['id' => $pura->id]) }}" title="Hapus Pura">
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-trash')}}"></use>
                                         </svg>

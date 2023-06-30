@@ -43,6 +43,8 @@ class PelinggihController extends Controller
             'keterangan' => 'required',
         ]);
 
+        $id = $request->input('pura_id');
+
         $pelinggih = new Pelinggih;
         $pelinggih->pura_id = $request->pura_id;
         $pelinggih->nama = $request->nama;
