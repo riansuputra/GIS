@@ -98,26 +98,30 @@
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-pencil')}}"></use>
                                         </svg>
                                     </a>
-                                    <a data-mdb-ripple-duration=0 href="{{ route('deletepengurus', ['puraid' => $pengurus->pura_id, 'id' => $pengurus->id]) }}" class="btn btn-danger" >
+                                    <a data-mdb-ripple-duration=0 type="button" data-id="{{ $pengurus->id }}" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#staticBackdropLive{{ $pengurus->id }}" class="btn btn-danger" >
                                         <svg class="icon">
                                             <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-trash')}}"></use>
                                         </svg>
-                                    </a>
+                                    </a>                                    
                                 </div>
                             </td>
                         </tr>
-                        <div class="modal fade" id="staticBackdropLive" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                        <div class="modal fade" id="staticBackdropLive{{ $pengurus->id }}" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel{{ $pengurus->id }}" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" style="width:20%;">
                                 <div class="modal-content">
                                     <div class="modal-header text-center">
-                                        <h5 class="modal-title w-100" id="exampleModalCenterTitle">Info</h5>
-                                        <button class="btn-close" type="button" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title w-100" id="staticBackdropLive">Info</h5>
+                                        <button class="btn-close" type="button" data-mdb-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body text-center">
                                         <p style="margin-bottom: 0">Apakah anda yakin ingin menghapus pengurus?</p>
                                     </div>
                                     <div class="modal-footer justify-content-center">
-                                        <a data-mdb-ripple-duration=0 href="/{{$pengurus->pura_id}}/{{$pengurus->id}}/deletepengurus" class="btn btn-primary" style="width: 30%" type="button">Ya</a>
+                                        <form action="{{ route('deletepengurus', ['puraid' => $pengurus->pura_id, 'id' => $pengurus->id]) }}" method="POST" id="deleteForm">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button data-mdb-ripple-duration=0 type="submit" style="width: 30%" class="btn btn-dark">Ya</button>
+                                        </form>
                                         <a data-mdb-ripple-duration=0 class="btn btn-secondary" style="width: 30%" type="button" data-coreui-dismiss="modal">Tidak</a>
                                     </div>
                                 </div>
@@ -135,6 +139,13 @@
 <script>
     $(document).ready(function () {
         $('#datatable').DataTable();
+    });
+    $(document).ready(function() {
+        // Event listener for delete button click
+        $('.btn-dark').click(function() {
+        var id = $(this).data('id');
+            $('#deleteForm').attr('action', id + '/' + puraid  + '/deletepengurus');
+        });
     });
 </script>
 <script type="text/javascript">

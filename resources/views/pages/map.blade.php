@@ -33,7 +33,6 @@
     </div>
 </div>
 
-        
 <div class="card">
     <div class="card-body">
         <div id="map" style="height: 670px">               

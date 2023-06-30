@@ -34,7 +34,7 @@ Route::get('/{id}/detailpura', [PuraController::class, 'detail'])->name('detailp
 Route::post('create', [PuraController::class, 'store'])->name('createpura');
 Route::get('/{id}/editpura', [PuraController::class, 'edit'])->name('editpura'); 
 Route::post('/{id}/updatepura', [PuraController::class, 'update'])->name('updatepura'); 
-Route::get('/{id}/deletepura', [PuraController::class, 'destroy'])->name('deletepura'); 
+Route::delete('/{id}/deletepura', [PuraController::class, 'destroy'])->name('deletepura'); 
     
 Route::get('/tambahpelinggih', [PelinggihController::class, 'create'])->name('tambahpelinggih');
 Route::get('/daftarpelinggih', [PelinggihController::class, 'show'])->name('daftarpelinggih');
@@ -43,7 +43,7 @@ Route::get('/{id}/detailpelinggih', [PelinggihController::class, 'detail'])->nam
 Route::post('/{id}/createpelinggih', [PelinggihController::class, 'store'])->name('createpelinggih');
 Route::get('/{puraid}/{id}/editpelinggih', [PelinggihController::class, 'edit'])->name('editpelinggih');
 Route::post('/{puraid}/{id}/updatepelinggih', [PelinggihController::class, 'update'])->name('updatepelinggih'); 
-Route::get('/{puraid}/{id}/deletepelinggih', [PelinggihController::class, 'destroy'])->name('deletepelinggih'); 
+Route::delete('/{puraid}/{id}/deletepelinggih', [PelinggihController::class, 'destroy'])->name('deletepelinggih'); 
 
 Route::get('/tambahpengurus', [PengurusController::class, 'create'])->name('tambahpengurus');
 Route::get('/daftarpengurus', [PengurusController::class, 'show'])->name('daftarpengurus');
@@ -52,4 +52,4 @@ Route::get('/{id}/detailpengurus', [PengurusController::class, 'detail'])->name(
 Route::post('/{id}/createpengurus', [PengurusController::class, 'store'])->name('createpengurus');
 Route::get('/{puraid}/{id}/editpengurus', [PengurusController::class, 'edit'])->name('editpengurus');
 Route::post('/{puraid}/{id}/updatepengurus', [PengurusController::class, 'update'])->name('updatepengurus');
-Route::get('/{puraid}/{id}/deletepengurus', [PengurusController::class, 'destroy'])->name('deletepengurus'); 
+Route::delete('/{puraid}/{id}/deletepengurus', [PengurusController::class, 'destroy'])->name('deletepengurus'); 

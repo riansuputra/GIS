@@ -107,13 +107,11 @@
                                         </a>
                                     </div>
                                     <div class="col-2" style="width:22%">
-                                        <a data-mdb-ripple-duration=0 data-coreui-toggle="modal" data-coreui-target="#staticBackdropLive" type="button" class="btn btn-danger text-light" style="display: inline-flex; align-items: flex-end;">
+                                        <a data-mdb-ripple-duration=0 type="button" data-id="{{ $puras->id }}" class="btn btn-danger text-light" data-mdb-toggle="modal" data-mdb-target="#staticBackdropLive{{ $puras->id }}" title="Hapus Pura" style="display: inline-flex; align-items: flex-end;">
                                             <svg class="icon me-2" style="width: 25; height: 25;">
                                                 <use xlink:href="{{url('/template/vendors/@coreui/icons/svg/free.svg#cil-trash')}}"></use>
-                                            </svg>
-                                            <span>
-                                                Hapus Pura
-                                            </span> 
+                                            </svg> Hapus Pura
+                                            
                                         </a>
                                     </div>
                                 </div>
@@ -143,18 +141,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="staticBackdropLive" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                <div class="modal fade" id="staticBackdropLive{{ $puras->id }}" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel{{ $puras->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" style="width:20%;">
                         <div class="modal-content">
                             <div class="modal-header text-center">
-                                <h5 class="modal-title w-100" id="exampleModalCenterTitle">Info</h5>
-                                <button class="btn-close" type="button" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title w-100" id="staticBackdropLive">Info</h5>
+                                <button class="btn-close" type="button" data-mdb-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-center">
                                 <p style="margin-bottom: 0">Apakah anda yakin ingin menghapus pura?</p>
                             </div>
                             <div class="modal-footer justify-content-center">
-                                <a data-mdb-ripple-duration=0 href="/{{$puras->id}}/deletepura" class="btn btn-primary" style="width: 30%" type="button">Ya</a>
+                                <form action="{{ route('deletepura', ['id' => $puras->id]) }}" method="POST" id="deleteForm">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button data-mdb-ripple-duration=0 type="submit" style="width: " class="btn btn-dark">Ya</button>
+                                </form>
                                 <a data-mdb-ripple-duration=0 class="btn btn-secondary" style="width: 30%" type="button" data-coreui-dismiss="modal">Tidak</a>
                             </div>
                         </div>
@@ -167,6 +169,13 @@
 <script>
     $(document).ready(function () {
         $('#datatable').DataTable();
+    });
+    $(document).ready(function() {
+        // Event listener for delete button click
+        $('.btn-dark').click(function() {
+        var id = $(this).data('id');
+            $('#deleteForm').attr( id + '/deletepura');
+        });
     });
 </script>
 <script src="{{url('/template/vendors/jquery/js/jquery.min.js')}}"></script>
