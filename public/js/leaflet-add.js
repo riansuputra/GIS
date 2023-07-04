@@ -4,8 +4,8 @@ var tileLayer = new L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.
 });
 
 var map = new L.map('map', {
-    'center': [-8.309882117649769, 114.56416986814997],
-    'zoom': 11,
+    'center': [-8.3641659, 115.0553845],
+    'zoom': 10,
     'layers': [tileLayer]
 });
 

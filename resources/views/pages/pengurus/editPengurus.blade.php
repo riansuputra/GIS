@@ -22,7 +22,7 @@
         </div>
         <div class="card-body">
             <div class="tab-content rounded-bottom">
-                <form method="POST" action="{{ route('updatepengurus', ['pura_id' => $pengurus->pura_id, 'id' => $pengurus->id]) }}" id="formCreate" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('updatepengurus', ['puraid' => $pengurus->pura_id, 'id' => $pengurus->id]) }}" id="formCreate" enctype="multipart/form-data">
                     @csrf
                 <div class="col mb-3">
                     <label class="form-label" for="sebagai">Sebagai :</label>

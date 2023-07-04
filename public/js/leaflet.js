@@ -1,4 +1,4 @@
-var map = L.map('map').setView([-8.309882117649769, 114.56416986814997], 11);
+var map = L.map('map').setView([-8.3641659, 115.0553845], 10.5);
 var routingControl;
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -118,18 +118,18 @@ map.on('click', function(e) {
     var popupContent;
     if (firstWaypoint === null) {
         popupContent = `
-            <h5 class="text-center">Set First Waypoint</h5>
-            <p>Do you want to set this location as the first waypoint?</p>
+            <h5 class="text-center">Atur Titik Posisi Awal</h5>
+            <p>Apakah Anda ingin mengatur lokasi ini sebagai titik posisi awal??</p>
             <div class="text-center">
-                <button data-mdb-ripple-duration=0 id="confirmBtn" class="btn btn-sm btn-primary">Confirm</button>
+                <button data-mdb-ripple-duration=0 id="confirmBtn" class="btn btn-sm btn-primary">Pilih</button>
             </div>
         `;
     } else {
         popupContent = `
-            <h5 class="text-center">Change First Waypoint</h5>
-            <p>Do you want to change the first waypoint to this location?</p>
+            <h5 class="text-center">Ubah Titik Posisi Awal</h5>
+            <p>Apakah Anda ingin mengubah titk posisi awal?</p>
             <div class="text-center">
-                <button data-mdb-ripple-duration=0 id="confirmBtn" class="btn btn-sm btn-primary">Confirm</button>
+                <button data-mdb-ripple-duration=0 id="confirmBtn" class="btn btn-sm btn-primary">Ubah</button>
             </div>
         `;
     }

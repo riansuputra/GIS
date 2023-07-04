@@ -77,6 +77,16 @@
                                 <input class="form-control" id="alamat" name="alamat" type="text" value="{{ $puras->alamat }}" disabled readonly>
                             </div>
                             <div class="row mb-3">
+                                <div class="col">
+                                    <label class="form-label" for="alamat">Latitude :</label>
+                                    <input class="form-control" id="alamat" name="alamat" type="text" value="{{ $puras->lat }}" disabled readonly>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label" for="alamat">Longitude :</label>
+                                    <input class="form-control" id="alamat" name="alamat" type="text" value="{{ $puras->lng }}" disabled readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 @foreach($penguruses as $pengurus)
                                     @if ($pengurus->pura_id == $puras->id && $pengurus->status == "Aktif")
                                         <div class="col">
